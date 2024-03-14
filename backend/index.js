@@ -1,10 +1,26 @@
 const express = require("express");
 const cors = require('cors');
-const { control } = require("./routes/routes");
 const app = express();
+const mongoose = require('mongoose');
+
+require('dotenv').config();
+
+const { control } = require("./routes/routes");
 
 app.use(express.json());
 app.use(cors());
+
+main()
+    .then(() => {
+        console.log("Connection Successful with Database 📊!");
+    })
+    .catch((err) => {
+        console.log(err);
+    });
+
+async function main() {
+    await mongoose.connect(process.env.MONGO_KEY);
+};
 
 app.get('/', (req, res) => {
     res.json("Backend Home Route is Working ✅!");
