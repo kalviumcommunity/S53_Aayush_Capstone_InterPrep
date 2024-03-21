@@ -17,7 +17,7 @@ const User = mongoose.model("User", {
     },
     interviews: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Interviews"
+        ref: "Interview"
     }],
     contact: {
         phone: {
