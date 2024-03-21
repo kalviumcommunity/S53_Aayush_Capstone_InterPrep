@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 
 const { control } = require("./routes/routes");
+const { userControl } = require("./routes/userRoutes");
 
 app.use(express.json());
 app.use(cors());
@@ -27,6 +28,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/control', control);
+app.use('/user', userControl);
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
