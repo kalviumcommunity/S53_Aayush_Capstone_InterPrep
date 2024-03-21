@@ -6,7 +6,7 @@ const app = express();
 const ExpressError = require("../utils/ExpressError");
 const wrapAsync = require("../utils/wrapAsync");
 
-require("dotenv").config({ path: "../.env" });
+require("dotenv").config();
 
 const userControl = express.Router();
 
