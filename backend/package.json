@@ -19,6 +19,7 @@
     "joi": "^17.12.2",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.2.1",
-    "nodemon": "^3.1.0"
+    "nodemon": "^3.1.0",
+    "password-hash": "^1.2.2"
   }
 }
