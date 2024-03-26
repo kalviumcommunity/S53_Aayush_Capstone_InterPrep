@@ -62,7 +62,6 @@ userControl.post(
                     {
                         username : foundUser.username,
                         name: foundUser.name,
-                        email: foundUser.contact.email,
                         type: "User"
                     },
                     process.env.JWT_PASS
