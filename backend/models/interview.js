@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const formatDate = require('../utils/formatDate');
 
-const Interview = mongoose.model("Interview", {
+const userInterview = mongoose.model("Interview", {
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User"
@@ -20,4 +20,4 @@ const Interview = mongoose.model("Interview", {
     },
 });
 
-module.exports = Interview;
+module.exports = userInterview;
