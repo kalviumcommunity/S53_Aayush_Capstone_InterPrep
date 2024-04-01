@@ -7,6 +7,7 @@ require('dotenv').config();
 
 const { control } = require("./routes/routes");
 const { userControl } = require("./routes/userRoutes");
+const { interviewerControl } = require("./routes/interviewerRoutes");
 
 app.use(express.json());
 app.use(cors());
@@ -29,6 +30,7 @@ app.get('/', (req, res) => {
 
 app.use('/control', control);
 app.use('/user', userControl);
+app.use('/interviewer', interviewerControl);
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {

@@ -1,13 +1,14 @@
 const mongoose = require('mongoose');
+const { Schema } = mongoose;
 const formatDate = require('../utils/formatDate');
 
-const userInterview = mongoose.model("Interview", {
+const interviewSchema = new Schema({
     user: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: "User"
     },
-    interviewer : {
-        type: mongoose.Schema.Types.ObjectId,
+    interviewer: {
+        type: Schema.Types.ObjectId,
         ref: "Interviewer"
     },
     chats: [{
@@ -19,9 +20,10 @@ const userInterview = mongoose.model("Interview", {
         }
     }],
     dateOfInterview: {
-        type: String,
-        default: formatDate
-    },
+        type: String
+    }
 });
 
-module.exports = userInterview;
+const Interview = mongoose.model("Interview", interviewSchema);
+
+module.exports = Interview;

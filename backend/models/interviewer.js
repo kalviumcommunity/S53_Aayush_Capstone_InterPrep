@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 const formatDate = require('../utils/formatDate');
-const { boolean } = require('joi');
+const { Schema } = mongoose;
 
-const Interview = mongoose.model("Interview", {
+const interviewerSchema = new Schema({
     username: {
         type: String,
         required: true,
@@ -17,20 +17,12 @@ const Interview = mongoose.model("Interview", {
         required: true
     },
     interviews: [{
-        type: mongoose.Schema.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: "Interview"
     }],
-    contact: {
-        phone: {
-            type: Number,
-            required: true,
-            unique: true
-        },
-        email: {
-            type: String,
-            required: true,
-            unique: true
-        }
+    image: {
+        type: String,
+        required: true
     },
     info: {
         qualification: {
@@ -46,8 +38,20 @@ const Interview = mongoose.model("Interview", {
             required: true
         }
     },
+    contact: {
+        phone: {
+            type: Number,
+            required: true,
+            unique: true
+        },
+        email: {
+            type: String,
+            required: true,
+            unique: true
+        }
+    },
     verified: {
-        type: boolean,
+        type: Boolean,
         default: false
     },
     dateJoined: {
@@ -56,4 +60,6 @@ const Interview = mongoose.model("Interview", {
     },
 });
 
-module.exports = Interview;
+const Interviewer = mongoose.model("Interviewer", interviewerSchema);
+
+module.exports = Interviewer;
