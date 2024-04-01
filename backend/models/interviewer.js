@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
 const formatDate = require('../utils/formatDate');
+const { boolean } = require('joi');
 
-const User = mongoose.model("User", {
+const Interview = mongoose.model("Interview", {
     username: {
         type: String,
         required: true,
@@ -9,7 +10,7 @@ const User = mongoose.model("User", {
     },
     name: {
         type: String,
-        required: true
+        required: true,
     },
     password: {
         type: String,
@@ -19,10 +20,6 @@ const User = mongoose.model("User", {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Interview"
     }],
-    image: {
-        type: String,
-        required: true
-    },
     contact: {
         phone: {
             type: Number,
@@ -35,10 +32,28 @@ const User = mongoose.model("User", {
             unique: true
         }
     },
+    info: {
+        qualification: {
+            type: String,
+            required: true
+        },
+        experience: {
+            type: String,
+            required: true
+        },
+        working: {
+            type: String,
+            required: true
+        }
+    },
+    verified: {
+        type: boolean,
+        default: false
+    },
     dateJoined: {
         type: String,
         default: formatDate
     },
 });
 
-module.exports = User;
+module.exports = Interview;

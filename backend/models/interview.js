@@ -6,6 +6,10 @@ const userInterview = mongoose.model("Interview", {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User"
     },
+    interviewer : {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Interviewer"
+    },
     chats: [{
         question: {
             type: String
