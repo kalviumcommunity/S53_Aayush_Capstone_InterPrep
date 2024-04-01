@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
-const { Schema } = mongoose;
 const formatDate = require('../utils/formatDate');
+const { Schema } = mongoose;
 
-const userSchema = new Schema({
+const interviewerSchema = new Schema({
     username: {
         type: String,
         required: true,
@@ -10,7 +10,7 @@ const userSchema = new Schema({
     },
     name: {
         type: String,
-        required: true
+        required: true,
     },
     password: {
         type: String,
@@ -24,6 +24,20 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
+    info: {
+        qualification: {
+            type: String,
+            required: true
+        },
+        experience: {
+            type: String,
+            required: true
+        },
+        working: {
+            type: String,
+            required: true
+        }
+    },
     contact: {
         phone: {
             type: Number,
@@ -36,12 +50,16 @@ const userSchema = new Schema({
             unique: true
         }
     },
+    verified: {
+        type: Boolean,
+        default: false
+    },
     dateJoined: {
         type: String,
         default: formatDate
     },
 });
 
-const User = mongoose.model("User", userSchema);
+const Interviewer = mongoose.model("Interviewer", interviewerSchema);
 
-module.exports = User;
+module.exports = Interviewer;
