@@ -32,6 +32,7 @@ userControl.post(
         let newUserData = new User({
             username:req.body.username,
             name:req.body.name,
+            image: req.body.image,
             password:hashedPassword,
             contact: req.body.contact 
         });

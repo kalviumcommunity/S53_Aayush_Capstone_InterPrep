@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
+const { Schema } = mongoose;
 const formatDate = require('../utils/formatDate');
 
-const User = mongoose.model("User", {
+const userSchema = new Schema({
     username: {
         type: String,
         required: true,
@@ -16,7 +17,7 @@ const User = mongoose.model("User", {
         required: true
     },
     interviews: [{
-        type: mongoose.Schema.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: "Interview"
     }],
     image: {
@@ -40,5 +41,7 @@ const User = mongoose.model("User", {
         default: formatDate
     },
 });
+
+const User = mongoose.model("User", userSchema);
 
 module.exports = User;

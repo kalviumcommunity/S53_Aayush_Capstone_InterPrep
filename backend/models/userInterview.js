@@ -1,9 +1,10 @@
 const mongoose = require('mongoose');
+const { Schema } = mongoose;
 const formatDate = require('../utils/formatDate');
 
-const Interview = mongoose.model("Interview", {
+const userInterviewSchema = new Schema({
     user: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: "User"
     },
     questions: [{
@@ -15,12 +16,10 @@ const Interview = mongoose.model("Interview", {
         }
     }],
     interviewer: {
-        name : {
-            type: String,
-            required: true
-        }
+        type: Schema.Types.ObjectId,
+        ref: "Interviewer"
     },
-    score:{
+    score: {
         type: String,
         required: true
     },
@@ -30,4 +29,6 @@ const Interview = mongoose.model("Interview", {
     },
 });
 
-module.exports = Interview;
+const UserInterview = mongoose.model("User Interview", userInterviewSchema);
+
+module.exports = UserInterview;
