@@ -36,10 +36,18 @@ const userSchema = new Schema({
             unique: true
         }
     },
+    posts: [{
+        type: Schema.Types.ObjectId,
+        ref: "Post"
+    }],
     dateJoined: {
         type: String,
         default: formatDate
     },
+    type: {
+        type: String,
+        default: "User"
+    }
 });
 
 const User = mongoose.model("User", userSchema);

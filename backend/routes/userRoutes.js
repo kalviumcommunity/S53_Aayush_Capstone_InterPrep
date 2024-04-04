@@ -33,8 +33,8 @@ userControl.post(
             username:req.body.username,
             name:req.body.name,
             image: req.body.image,
-            password:hashedPassword,
-            contact: req.body.contact 
+            password: hashedPassword,
+            contact: req.body.contact
         });
         let findUser = await User.find({ username: req.body.username });
         if (findUser.length == 0) {
@@ -75,7 +75,7 @@ userControl.post(
             throw new ExpressError(404, "Username not found!");
         }
     })
-)
+);
 
 userControl.use((err, req, res, next) => {
     let { status = 500, message = "Some error occured...!" } = err;

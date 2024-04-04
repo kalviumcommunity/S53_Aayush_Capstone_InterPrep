@@ -28,3 +28,10 @@ module.exports.interviewerValidation = Joi.object({
     dateJoined: Joi.string(),
     verified: Joi.boolean()
 });
+
+module.exports.postValidation = Joi.object({
+    description: Joi.string().required(),
+    user: Joi.string(),
+    likes: Joi.array(),
+    comments: Joi.array(),
+})
