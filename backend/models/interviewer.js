@@ -38,6 +38,10 @@ const interviewerSchema = new Schema({
             required: true
         }
     },
+    posts: [{
+        type: Schema.Types.ObjectId,
+        ref: "Post"
+    }],
     contact: {
         phone: {
             type: Number,
@@ -58,6 +62,10 @@ const interviewerSchema = new Schema({
         type: String,
         default: formatDate
     },
+    type: {
+        type: String,
+        default: "Interviewer"
+    }
 });
 
 const Interviewer = mongoose.model("Interviewer", interviewerSchema);
