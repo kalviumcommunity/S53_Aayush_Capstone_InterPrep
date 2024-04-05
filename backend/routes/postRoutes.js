@@ -5,7 +5,7 @@ const ExpressError = require("../utils/ExpressError");
 const wrapAsync = require("../utils/wrapAsync");
 const Post = require("../models/post");
 const User = require("../models/user");
-const { postValidation } = require("../utils/validation");
+const { postValidation, commentValidation } = require("../utils/validation");
 
 require("dotenv").config();
 
@@ -37,12 +37,21 @@ const validatePost = (req, res, next) => {
     } else {
         next();
     }
+};
+
+const validateComment = (req, res, next) => {
+    let { error } = commentValidation.validate(req.body);
+    if (error) {
+        throw new ExpressError(400, error);
+    } else {
+        next();
+    }
 }
 
 postControl.get(
     "/",
     wrapAsync(async (req, res) => {
-        await Post.find().populate('user').then((data) => { returnData = data });
+        await Post.find().populate('user').populate('comments').then((data) => { returnData = data });
         if (returnData.length == 0) {
             throw new ExpressError(404, "No Posts Yet!")
         }
@@ -116,7 +125,7 @@ postControl.post(
             throw new ExpressError(404, "User not found");
         }
 
-        if (!(dislikedPost.likes.includes(user._id.toString()))) {
+        if (!(dislikedPost.likes.includes(user._id))) {
             return res.status(400).send("User has not liked this post to dislike it");
         }
 
@@ -127,11 +136,60 @@ postControl.post(
     })
 );
 
+postControl.post(
+    "/comment/:id",
+    validateComment,
+    jwtVerify,
+    wrapAsync(async (req, res) => {
+        let { username, description } = req.body;
+        let { id } = req.params;
+        let postComment = await Post.findById(id);
+        if (!postComment) {
+            throw new ExpressError(404, "Post not Found!")
+        }
+
+        let user = await User.findOne({ username: username });
+        if (!user) {
+            throw new ExpressError(404, "User not found");
+        }
+
+        let newComment = { description: description, user: user._id }
+
+        if (newComment) {
+            postComment.comments.push(newComment);
+        }
+
+        await postComment.save();
+
+        res.send("Comment Added!");
+    })
+);
+
+postControl.delete(
+    "/delete/:id",
+    jwtVerify,
+    wrapAsync(async (req, res) => {
+        let { username } = req.body;
+        let { id } = req.params;
+        let foundUser = await User.findOne({ username: username });
+        if (!foundUser) {
+            throw new ExpressError(404, "User not found");
+        }
+        let deletePost = await Post.findById(id).populate('user');
+        if (!deletePost) {
+            throw new ExpressError(404, "Post not Found!")
+        };
+        if (deletePost.user.username != foundUser.username) {
+            throw new ExpressError(403, "Unauthorized Request!")
+        }
+        await Post.findByIdAndDelete(id);
+        res.send("Post deleted successfully");
+    })
+);
+
 postControl.use((err, req, res, next) => {
     let { status = 500, message = "Some error occured...!" } = err;
     res.status(status).send(message);
 });
-
-
 
 module.exports = { postControl };

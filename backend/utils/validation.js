@@ -34,4 +34,8 @@ module.exports.postValidation = Joi.object({
     user: Joi.string(),
     likes: Joi.array(),
     comments: Joi.array(),
+});
+
+module.exports.commentValidation = Joi.object({
+    description: Joi.string().required()
 })
