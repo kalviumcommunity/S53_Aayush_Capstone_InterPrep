@@ -29,6 +29,6 @@ const companySchema = new Schema({
     }
 });
 
-const Interview = mongoose.model("Company", companySchema);
+const Company = mongoose.model("Company", companySchema);
 
-module.exports = Interview;
+module.exports = Company;
