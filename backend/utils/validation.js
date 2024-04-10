@@ -38,4 +38,13 @@ module.exports.postValidation = Joi.object({
 
 module.exports.commentValidation = Joi.object({
     description: Joi.string().required()
+});
+
+module.exports.companyValidation = Joi.object({
+    company: Joi.string().required(),
+    username: Joi.string().required(),
+    website: Joi.string().required(),
+    description: Joi.string().required(),
+    dateJoined: Joi.string().required(),
+    hiring: Joi.boolean()
 })
