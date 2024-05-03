@@ -33,6 +33,7 @@ import {
     CloseIcon
   } from "@chakra-ui/icons";
   import Logo from "../assets/Logo.png"
+import { memo } from 'react';
 
   const LinkItems = [
     { name: 'Home', icon: FiHome },
@@ -196,4 +197,4 @@ import {
     );
   }
   
-  export default Sidebar;
+  export default memo(Sidebar);
