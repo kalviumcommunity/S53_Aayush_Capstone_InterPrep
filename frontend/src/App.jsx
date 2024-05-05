@@ -1,6 +1,9 @@
 import './App.css'
+import Sidebar from './components/Sidebar';
+import TestPage from './components/TestPage';
 import AllRoutes from './components/routes/AllRoutes'
 import { ChakraProvider, extendTheme } from '@chakra-ui/react'
+import { useLocation } from 'react-router-dom';
 
 const customTheme = extendTheme({
   breakpoints: {
@@ -15,9 +18,17 @@ const customTheme = extendTheme({
 
 function App() {
 
+  const location = useLocation();
+  const pathname = location.pathname;
+  const lastSegment = pathname.substring(pathname.lastIndexOf('/') + 1);
+  const shouldShowSidebar = lastSegment === 'hello' || lastSegment === 'browse';
+
+
+
   return (
     <>
     <ChakraProvider theme={customTheme}>
+    {shouldShowSidebar && <Sidebar />}
       <AllRoutes />
     </ChakraProvider>
     </>
