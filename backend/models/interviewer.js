@@ -38,6 +38,10 @@ const interviewerSchema = new Schema({
             required: true
         }
     },
+    certificate: {
+        type: String,
+        required: true
+    },
     posts: [{
         type: Schema.Types.ObjectId,
         ref: "Post"
@@ -53,6 +57,10 @@ const interviewerSchema = new Schema({
             required: true,
             unique: true
         }
+    },
+    reason : {
+        type: String,
+        required:"true"
     },
     verified: {
         type: Boolean,

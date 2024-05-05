@@ -55,7 +55,9 @@ interviewerControl.post(
             password: hashedPassword,
             image: req.body.image,
             info: req.body.info,
-            contact: req.body.contact
+            contact: req.body.contact,
+            certificate: req.body.certificate,
+            reason: req.body.reason
         });
         let findUser = await Interviewer.find({ username: req.body.username });
         if (findUser.length == 0) {
