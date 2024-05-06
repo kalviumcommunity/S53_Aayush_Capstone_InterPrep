@@ -27,6 +27,7 @@ function Homepage() {
           color="transparent"
           width={['80%', '80%', '60%']}
           mx="auto"
+          fontFamily='Didact Gothic'
         >
           Master tech interviews and <br /> discover job openings <br />effortlessly!
         </Box>
@@ -36,6 +37,7 @@ function Homepage() {
           alignItems="center"
           flexDirection={['column', 'column', 'row']} 
           spacing={4}
+          
         >
           <Button
             bgGradient="linear(to-r, #3E005B, #5B004D)"
@@ -43,6 +45,8 @@ function Homepage() {
             _hover={{
               bgGradient: 'linear(to-r, #5B004D, #3E005B)',
             }}
+          fontFamily='Didact Gothic'
+
             size={['md', 'md', 'lg']}
           >
             Apply for Jobs
@@ -50,6 +54,7 @@ function Homepage() {
           <Button
             bg="rgba(153, 153, 153, 0.22)"
             color="white"
+          fontFamily='Didact Gothic'
             _hover={{
               bg: 'rgba(153, 153, 153, 0.35)',
             }}
