@@ -87,6 +87,7 @@ export default function HomeNavbar() {
               bg: "black",
               boxShadow: "0 6px 12px 0 #00E0FF70",
             }}
+            fontFamily="Didact Gothic"
           >
             Get started
           </Button>

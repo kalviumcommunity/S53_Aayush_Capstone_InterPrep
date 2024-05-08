@@ -55,20 +55,34 @@ interviewerControl.post(
             password: hashedPassword,
             image: req.body.image,
             info: req.body.info,
-            contact: req.body.contact,
+            email: req.body.email,
+            phone: req.body.phone,
             certificate: req.body.certificate,
             reason: req.body.reason
         });
+        console.log(newInterviewerData);
         let findUser = await Interviewer.find({ username: req.body.username });
-        if (findUser.length == 0) {
-            await newInterviewerData.save();
-            let token = jwt.sign(
-                { username: req.body.username },
-                process.env.JWT_PASS
-            );
-            res.send(token);
+        let findNo = await Interviewer.find({ phone: req.body.phone })
+        let findMail = await Interviewer.find({ email: req.body.email })
+
+        if (findUser.length == "0") {
+            if (findNo.length == "0") {
+                if (findMail.length == "0") {
+                    await newInterviewerData.save();
+                    let token = jwt.sign(
+                        { username: req.body.username },
+                        process.env.JWT_PASS
+                    );
+                    res.send(token);
+                } else {
+                    throw new ExpressError(400, "An account is already linked to the Email.");
+                }
+            } else {
+                throw new ExpressError(400, "An account is already linked to the phone number.");
+            }
+
         } else {
-            throw new ExpressError(400, "Interviewer Username Exists");
+            throw new ExpressError(400, "Interviewer Username Exists, Try new!");
         }
     })
 );
