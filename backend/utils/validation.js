@@ -18,9 +18,9 @@ module.exports.userInterview = Joi.object({
 })
 
 module.exports.interviewerValidation = Joi.object({
-    username: Joi.string().required(),
+    username: Joi.string().min(3).max(10).required(),
     name: Joi.string().required(),
-    password: Joi.string().required(),
+    password: Joi.string().pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=.*[a-zA-Z]).{6,20}$/).required(),
     image: Joi.string().required(),
     interviews: Joi.array().items(Joi.object()).optional(),
     posts: Joi.array().items(Joi.object()).optional(),
@@ -30,10 +30,8 @@ module.exports.interviewerValidation = Joi.object({
         working: Joi.string().required()
     }).required(),
     certificate: Joi.string().required(),
-    contact: Joi.object({
-        phone: Joi.number().integer().required(),
-        email: Joi.string().email().required()
-    }).required(),
+    phone: Joi.number().integer().min(10).required(),
+    email: Joi.string().pattern(new RegExp('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$')).required(),
     reason: Joi.string().required(),
     verified: Joi.boolean().default(false),
     dateJoined: Joi.string(),
