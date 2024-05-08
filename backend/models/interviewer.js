@@ -46,21 +46,19 @@ const interviewerSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "Post"
     }],
-    contact: {
-        phone: {
-            type: Number,
-            required: true,
-            unique: true
-        },
-        email: {
-            type: String,
-            required: true,
-            unique: true
-        }
+    phone: {
+        type: Number,
+        required: true,
+        unique: true
     },
-    reason : {
+    email: {
         type: String,
-        required:"true"
+        required: true,
+        unique: true
+    },
+    reason: {
+        type: String,
+        required: "true"
     },
     verified: {
         type: Boolean,

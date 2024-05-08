@@ -7,16 +7,14 @@ import {
   Heading,
   Flex,
   FormControl,
-  GridItem,
   FormLabel,
   Input,
-  Select,
   SimpleGrid,
-  InputLeftAddon,
   InputGroup,
   Textarea,
   FormHelperText,
   InputRightElement,
+  Tooltip,
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import { useToast } from "@chakra-ui/react";
@@ -28,6 +26,8 @@ import {
 } from "firebase/storage";
 import app from "../firebase";
 import axios from "axios";
+import { InfoOutlineIcon } from "@chakra-ui/icons";
+import { MdCloudUpload } from "react-icons/md";
 
 const Form1 = ({ register, errors }) => {
   const [show, setShow] = useState(false);
@@ -45,7 +45,17 @@ const Form1 = ({ register, errors }) => {
         letterSpacing="1px"
         color="white"
       >
-        Interviewer Registration
+        Interviewer Registration &nbsp;
+        <Tooltip
+          hasArrow
+          label="Please provide with accurate information!"
+          bg="white"
+          placement="right"
+          color="black"
+          fontWeight="100"
+        >
+          <InfoOutlineIcon w={4} style={{ cursor: "pointer" }} />
+        </Tooltip>
       </Heading>
       <Flex>
         <FormControl mr="5%" isRequired>
@@ -68,7 +78,11 @@ const Form1 = ({ register, errors }) => {
           <Input
             id="username"
             placeholder="Doe"
-            {...register("username", { required: "Username is required" })}
+            {...register("username", {
+              required: "Username is required",
+              minLength: { value: 3, message: "Minimum of 3 chars required" },
+              maxLength: { value: 10, message: "Max of 10 chars required" },
+            })}
             color="white"
           />
           <p className="err">{errors.username && errors.username.message}</p>
@@ -82,7 +96,13 @@ const Form1 = ({ register, errors }) => {
           id="email"
           type="email"
           placeholder="abc123@gmail.com"
-          {...register("email", { required: "Email is required" })}
+          {...register("email", {
+            required: "Email is required",
+            pattern: {
+              value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+              message: "Invalid email address",
+            },
+          })}
           color="white"
         />
         <FormHelperText color="white">
@@ -91,16 +111,68 @@ const Form1 = ({ register, errors }) => {
         <p className="err">{errors.email && errors.email.message}</p>
       </FormControl>
 
+      <FormControl mt="2%" isRequired>
+        <FormLabel htmlFor="phone" fontWeight="normal" color="white">
+          Contact No.
+        </FormLabel>
+        <Input
+          id="phone"
+          type="number"
+          placeholder="90XXXXXXXX"
+          {...register("phone", {
+            required: "Phone No. is required",
+            pattern: {
+              value: /^\d{10}$/,
+              message: "Invalid Number",
+            },
+          })}
+          color="white"
+        />
+        <p className="err">{errors.phone && errors.phone.message}</p>
+      </FormControl>
+
       <FormControl isRequired>
         <FormLabel htmlFor="password" fontWeight="normal" mt="2%" color="white">
-          Password
+          Password &nbsp;
+          <Tooltip
+            hasArrow
+            backgroundColor="white"
+            label={
+              <ul style={{ listStyleType: "disc", paddingLeft: "12px" }}>
+                <li>6-20 characters Long</li>
+                <li>At least one uppercase letter.</li>
+                <li>At least one lowercase letter.</li>
+                <li>At least one special character.</li>
+                <li>At least one number.</li>
+              </ul>
+            }
+            placement="right"
+            color="black"
+            fontSize="0.8rem"
+            fontWeight="100"
+          >
+            <InfoOutlineIcon
+              w="4"
+              pos="absolute"
+              top="2px"
+              right="1px"
+              cursor="pointer"
+            />
+          </Tooltip>
         </FormLabel>
         <InputGroup size="md">
           <Input
             pr="4.5rem"
             type={show ? "text" : "password"}
             placeholder="Enter password"
-            {...register("password", { required: "Password is required" })}
+            {...register("password", {
+              required: "Password is required",
+              pattern: {
+                value:
+                  /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=.*[a-zA-Z]).{6,20}$/,
+                message: "Password Invalid!",
+              },
+            })}
             color="white"
           />
           <InputRightElement width="4.5rem">
@@ -116,16 +188,25 @@ const Form1 = ({ register, errors }) => {
   );
 };
 
-const Form2 = ({ register, errors, cvURL, setCVURL }) => {
-  const [cv, setCV] = useState();
-  const [cvPerc, setCVPerc] = useState(0);
-  const [isFileUploaded, setIsFileUploaded] = useState(false);
-
-  const [isLoading, setIsLoading] = useState(false); // Define isLoading state
+const Form2 = ({
+  register,
+  errors,
+  cvURL,
+  setCVURL,
+  selectedFile,
+  setIsLoading,
+  isLoading,
+  setIsFileUploaded,
+  isFileUploaded,
+  setCV,
+  cv,
+}) => {
+  // const [isFileUploaded, setIsFileUploaded] = useState(false);
+  // const [isLoading, setIsLoading] = useState(false); // loading for upload button
 
   const handleUpload = () => {
     if (cv) {
-      setIsLoading(true); // Set loading state to true when upload begins
+      setIsLoading(true);
       uploadFile(cv, "cvUrl");
     }
   };
@@ -143,8 +224,7 @@ const Form2 = ({ register, errors, cvURL, setCVURL }) => {
         // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
         const progress =
           (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        setCVPerc(progress);
-        console.log("Upload is " + cvPerc + "% done");
+        console.log("Upload is " + progress + "% done");
         switch (snapshot.state) {
           case "paused":
             console.log("Upload is paused");
@@ -155,24 +235,35 @@ const Form2 = ({ register, errors, cvURL, setCVURL }) => {
         }
       },
       (error) => {
-        // Handle upload errors
-        console.error("Upload failed:", error);
-        setIsLoading(false);
+        switch (error.code) {
+          case "storage/unauthorized":
+            console.log("You are not authorized to upload!");
+            break;
+          case "storage/canceled":
+            console.log("You have cancelled the upload!");
+            break;
+          case "storage/unknown":
+            console.log("Unknown error occured!");
+            break;
+        }
       },
       () => {
-        // Upload completed successfully, now we can get the download URL
-        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-          console.log("File available at", downloadURL);
-          setCVURL((prev) => {
-            return {
-              ...prev,
-              [fileType]: downloadURL,
-            };
+        getDownloadURL(uploadTask.snapshot.ref)
+          .then((downloadURL) => {
+            console.log("File available at", downloadURL);
+            setCVURL((prev) => {
+              return {
+                ...prev,
+                [fileType]: downloadURL,
+              };
+            });
+            setIsFileUploaded(true);
+            setIsLoading(false);
+          })
+          .catch((error) => {
+            console.error("Error getting download URL:", error);
+            setIsLoading(false);
           });
-          console.log(cvURL);
-          setIsFileUploaded(true);
-          setIsLoading(false);
-        });
       }
     );
   };
@@ -205,7 +296,7 @@ const Form2 = ({ register, errors, cvURL, setCVURL }) => {
           {errors.qualification && errors.qualification.message}
         </p>
       </FormControl>
-      <Flex mt="2%">
+      <Flex mt="3%">
         <FormControl mr="5%" isRequired>
           <FormLabel htmlFor="experience" fontWeight="normal" color="white">
             Experience
@@ -235,40 +326,51 @@ const Form2 = ({ register, errors, cvURL, setCVURL }) => {
         </FormControl>
       </Flex>
 
-      <FormControl mt="2%" isRequired>
+      <FormControl mt="3%" isRequired>
         <FormLabel htmlFor="cv" fontWeight="normal" color="white">
           Please Upload your CV
         </FormLabel>
-        <input
-          id="cv"
-          placeholder="Company, Freelancing etc."
-          {...register("cv", { required: "Uploading CV is required" })}
-          color="white"
-          style={{ color: "white" }}
-          type="file"
-          accept="application/pdf, .docx"
-          onChange={(e) => {
-            setCV((prev) => e.target.files[0]);
-          }}
-        />
-        <Button
-          onClick={handleUpload}
-          isLoading={isLoading}
-          loadingText="Uploading ..."
-        >
-          Upload CV
-        </Button>
-        <p className="err">{errors.cv && errors.cv.message}</p>
+        <label className="custom-upload">
+          <MdCloudUpload w={"2px"} h={"2px"} />
+          &nbsp; &nbsp; Select a File {cv && `- ${cv.name}`}
+          <input
+            id="cv"
+            placeholder="Company, Freelancing etc."
+            {...register("cv", { required: "Uploading CV is required" })}
+            color="white"
+            style={{ color: "white" }}
+            type="file"
+            accept="application/pdf, .docx"
+            onChange={(e) => {
+              setCV((prev) => e.target.files[0]);
+              console.log(e.target.files[0].name);
+            }}
+            disabled={isFileUploaded} // Disable input when file is uploaded
+          />
+        </label>
+        {isFileUploaded ? (
+          <p style={{ color: "green" }}>File uploaded successfully!</p>
+        ) : (
+          <Button
+            onClick={handleUpload}
+            isLoading={isLoading}
+            loadingText="Uploading ..."
+            disabled={isFileUploaded} // Disable button when file is uploaded
+          >
+            Upload CV
+          </Button>
+        )}
+        {!isFileUploaded && ( // Only render error if file is not uploaded
+          <p className="err">{errors.cv && errors.cv.message}</p>
+        )}
       </FormControl>
-
-      {/* Other form fields */}
     </>
   );
 };
 
 const Form3 = ({ register, errors }) => {
   return (
-    <>x
+    <>
       <Heading w="100%" textAlign="center" fontWeight="normal" color="white">
         Interviewer
       </Heading>
@@ -293,10 +395,12 @@ const Form3 = ({ register, errors }) => {
 export default function InterviewSignup() {
   const toast = useToast();
   const [step, setStep] = useState(0);
-  const [isLoading, setIsLoading] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [cvURL, setCVURL] = useState('');
+  const [cvURL, setCVURL] = useState("");
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [cv, setCV] = useState();
   const [isFileUploaded, setIsFileUploaded] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const [sendData, setsendData] = useState({
     username: "",
@@ -304,7 +408,8 @@ export default function InterviewSignup() {
     password: "",
     image: "",
     info: { qualification: "", experience: "", working: "" },
-    contact: { phone: "", email: "" },
+    phone: "",
+    email: "",
     certificate: "",
   });
 
@@ -328,26 +433,23 @@ export default function InterviewSignup() {
           experience: data.experience,
           working: data.working,
         },
-        contact: {
-          phone: "9839392381",
-          email: data.email,
-        },
+        phone: data.phone,
+        email: data.email,
         certificate: cvURL.cvUrl,
         reason: data.reason,
       };
-  
+
       await new Promise((resolve) => {
         setsendData(updatedSendData);
         resolve();
+        console.log(sendData);
       });
-  
-      console.log(sendData);
-  
+
       const response = await axios.post(
         "http://localhost:8080/interviewer/signup",
         updatedSendData
       );
-  
+
       if (response.data) {
         setIsSubmitted(true);
         toast({
@@ -357,43 +459,56 @@ export default function InterviewSignup() {
           duration: 3000,
           isClosable: true,
         });
-        console.log('Signup successful:', response.data);
+        console.log("Signup successful!");
       }
     } catch (error) {
       console.error("Submission failed:", error);
       toast({
         title: "Submission failed",
-        description: error.response ? error.response.data.message : "An error occurred",
+        description: error.response.data,
         status: "error",
         duration: 3000,
         isClosable: true,
       });
     } finally {
       setIsLoading(false);
-      setStep(step + 1);
     }
   };
-  
 
   const onNext = async () => {
+    console.log("Next button clicked");
+    console.log("Current step:", step);
     const isValid = await trigger();
+
+    if (step === 1 && isFileUploaded) {
+      console.log("File is uploaded and step is 1. Trigger will not work.");
+      setStep((prevStep) => prevStep + 1);
+      return;
+    }
+
     if (isValid) {
-      if (step == 1 && isFileUploaded) {
-        setStep(step + 1);
-      } else if (step < 2) {
-        setStep(step + 1);
+      if (step < 2) {
+        setStep((prevStep) => prevStep + 1);
+        console.log("New step:", step); // Log the new step value
+      }
+      if (step == 2) {
+        console.log("yes");
+        setStep((prevStep) => prevStep + 1);
       }
     }
+
+    console.log(step);
   };
 
   const onBack = () => {
     if (step > 0) {
-      setStep(step - 1);
+      setStep((prev) => prev - 1);
     }
   };
 
   const handleCVURLChange = (url) => {
     setCVURL(url);
+    setSelectedFile(url);
     setIsFileUploaded(true);
   };
 
@@ -414,7 +529,7 @@ export default function InterviewSignup() {
             value={33.33 * step}
             mb="5%"
             mx="5%"
-            transition="width 0.3s ease-in-out" // Add transition property for smooth animation
+            transition="width 0.3s ease-in-out"
           ></Progress>
           {step === 0 ? (
             <Form1 register={register} errors={errors} />
@@ -422,8 +537,14 @@ export default function InterviewSignup() {
             <Form2
               register={register}
               errors={errors}
-              cvURL={cvURL}
+              cv={cv}
+              setCV={setCV}
+              isFileUploaded={isFileUploaded}
+              setIsFileUploaded={setIsFileUploaded}
+              isLoading={isLoading}
+              setIsLoading={setIsLoading}
               setCVURL={handleCVURLChange}
+              selectedFile={selectedFile}
             />
           ) : (
             <Form3 register={register} errors={errors} />
@@ -461,6 +582,7 @@ export default function InterviewSignup() {
                 colorScheme="red"
                 variant="solid"
                 isLoading={isLoading}
+                onClick={onNext}
               >
                 Submit
               </Button>
