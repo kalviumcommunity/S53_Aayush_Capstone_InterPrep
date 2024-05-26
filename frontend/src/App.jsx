@@ -20,14 +20,11 @@ function App() {
   const location = useLocation();
   const pathname = location.pathname;
   const lastSegment = pathname.substring(pathname.lastIndexOf('/') + 1);
-  const shouldShowSidebar = lastSegment === 'hello' || lastSegment === 'browse';
-
-
+  const shouldShowSidebar = pathname.startsWith('/jobs') || pathname === '/browse';
 
   return (
     <>
     <ChakraProvider theme={customTheme}>
-    {shouldShowSidebar && <Sidebar />}
       <AllRoutes />
     </ChakraProvider>
     </>

@@ -18,9 +18,14 @@ const jwtVerify = (req, res, next) => {
     try {
         let { authorization } = req.headers;
         let result = jwt.verify(authorization, process.env.JWT_PASS);
-        if (result) {
+        if (result && (result.type == "User")) {
             req.body.username = result.username;
             next();
+        }else{
+            throw new ExpressError(
+                403,
+                "Invalid Token"
+            )
         }
     } catch (err) {
         throw new ExpressError(

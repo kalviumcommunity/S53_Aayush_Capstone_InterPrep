@@ -18,7 +18,6 @@ function Mainpage() {
       top="20"
       position="absolute"
       color={"white"}
-
     >
       <Box display={"flex"} gap={5} flexDirection={{base:"column", md:"row"}}>
         <Box bg="rgba(250,250,250, 10%)" display={"flex"} p={{base:"5", md:"10"}} style={{borderRadius:"10px"}}

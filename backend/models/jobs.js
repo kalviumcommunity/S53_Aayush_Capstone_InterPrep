@@ -2,20 +2,12 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 const formatDate = require('../utils/formatDate');
 
-const companySchema = new Schema({
+const jobSchema = new Schema({
     company: {
         type: String,
         required: true
     },
-    username: {
-        type: String,
-        required: true
-    },
-    password: {
-        type: String,
-        required: true
-    },
-    website: {
+    role: {
         type: String,
         required: true
     },
@@ -23,24 +15,36 @@ const companySchema = new Schema({
         type: String,
         required: true
     },
-    jobs: [{
-        type: Schema.Types.ObjectId,
-        ref: "Jobs"
-    }],
-    hiring: {
-        type: Boolean,
-        default: false
-    },
-    image: {
+    salary: {
         type: String,
         required: true
     },
-    dateJoined: {
+    timing: {
+        type: String,
+        required: true
+    },
+    applied: [{
+        type: Schema.Types.ObjectId,
+        ref: "User"
+    }],
+    place: {
+        type: String,
+        required: true
+    },
+    experience: {
+        type: String,
+        required: true
+    },
+    notice: {
+        type: String,
+        required: true
+    },
+    datePosted: {
         type: String,
         default: formatDate
-    },
+    }
 });
 
-const Company = mongoose.model("Company", companySchema);
+const Jobs = mongoose.model("Jobs", jobSchema);
 
-module.exports = Company;
+module.exports = Jobs;

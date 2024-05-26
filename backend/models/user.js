@@ -43,10 +43,6 @@ const userSchema = new Schema({
     dateJoined: {
         type: String,
         default: formatDate
-    },
-    type: {
-        type: String,
-        default: "User"
     }
 });
 
