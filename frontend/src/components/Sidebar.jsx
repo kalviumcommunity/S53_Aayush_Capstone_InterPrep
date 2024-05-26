@@ -83,6 +83,7 @@ import { memo } from 'react';
           borderRadius="lg"
           role="group"
           cursor="pointer"
+          fontFamily='Didact Gothic'
           _hover={{
             bg: '#ffffff20',
             color: 'white',
@@ -139,10 +140,9 @@ import { memo } from 'react';
                     alignItems="flex-start"
                     spacing="1px"
                     ml="2"
-                    
                     >
-                    <Text fontSize="md" color="white">Justina Clark</Text>
-                    <Text fontSize="sm" color="gray.600">
+                    <Text fontSize="md" color="white" fontFamily='Didact Gothic'> Justina Clark</Text>
+                    <Text fontSize="sm" color="gray.600" fontFamily='Didact Gothic'>
                       Admin
                     </Text>
                   </VStack>
@@ -170,11 +170,11 @@ import { memo } from 'react';
     );
   }
   
-  const Sidebar = () => {
+  const Sidebar = ({children}) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
   
     return (
-      <Box minH="100vh" bg={useColorModeValue('black')} >
+      <Box minH="100%" bg={useColorModeValue('black')} >
         <SidebarContent onClose={() => onClose} display={{ base: 'none', md: 'block' }} />
         <Drawer
           isOpen={isOpen}
@@ -188,6 +188,9 @@ import { memo } from 'react';
           </DrawerContent>
         </Drawer>
         <MobileNav onOpen={onOpen} />
+        <Box ml={{ base: 0, md: 60 }} p="4">
+        {children}
+      </Box>
       </Box>
     );
   }

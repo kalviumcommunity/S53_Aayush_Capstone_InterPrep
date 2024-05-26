@@ -4,7 +4,7 @@ module.exports.userValidation = Joi.object({
     username: Joi.string().required(),
     name: Joi.string().required(),
     image: Joi.string(),
-    password: Joi.string().required(),
+    password: Joi.string().pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=.*[a-zA-Z]).{6,20}$/).required(),
     contact: Joi.object(),
     dateJoined: Joi.string()
 });
@@ -52,8 +52,22 @@ module.exports.commentValidation = Joi.object({
 module.exports.companyValidation = Joi.object({
     company: Joi.string().required(),
     username: Joi.string().required(),
+    password: Joi.string().pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=.*[a-zA-Z]).{6,20}$/).required(),
     website: Joi.string().required(),
     description: Joi.string().required(),
-    dateJoined: Joi.string().required(),
+    dateJoined: Joi.string(),
     hiring: Joi.boolean()
 })
+
+module.exports.jobValidation = Joi.object({
+    company: Joi.string(),
+    role: Joi.string().required(),
+    description: Joi.string().required(),
+    salary: Joi.string().required(),
+    timing: Joi.string().required(),
+    applied: Joi.array().items(),
+    place: Joi.string().required(),
+    experience: Joi.string().required(),
+    notice: Joi.string().required(),
+    datePosted: Joi.string()
+});
