@@ -58,14 +58,6 @@ This project is based on MERN Stack
 - [ ] Payment Gateway
 - [ ] Video Call
 
-## Timeline
-
-- **Day 1** - Setting up Project (Repository + ReadMe)
-- **Day 2** - Setting up Backend Server (Basic Routes)
-- **Day 3** - Setting up Database (Setting up Database + Connecting with Backend)
-- **Day 4** - Figma Design (Low Fidelity for basic structure of the project)
-- **Day 5** - CRUD Operations - I (For user login and signup)
-
 ### Reach out to me
 
 Have questions or suggestions? Contact us at [aayushh2k@gmail.com](mailto:aayushh2k@gmail.com).
