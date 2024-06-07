@@ -7,9 +7,11 @@ InterPrep is here to support you in getting ready for your next technical interv
 
 ## Links
 
+The project is under development currently ⚠️
+
 [Deployed Backend Link](https://interprepback.vercel.app/)
 
-Currently Working on Front End!
+[Deployed Frontend Link](https://inter-prep.vercel.app/)
 
 
 ## Overview
@@ -48,13 +50,15 @@ This project is based on MERN Stack
 ## Features Check list
 
 - [ ] Login (<- Currently Working on this)
+- [ ] Jobs Page (<- Currently Working on this)
 - [ ] Chats Feature
 - [x] File Upload
 - [ ] Apply for a Job
 - [x] Signup as an Interviewer
 - [ ] Signup as a User
 - [ ] Welcome E-Mail on Signup
-- [ ] Book Interviews
+- [ ] Interview Booking Page
+- [ ] Book Interviews 
 - [ ] Payment Gateway
 - [ ] Video Call
 
