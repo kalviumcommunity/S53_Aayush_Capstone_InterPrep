@@ -1,9 +1,9 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
-import Homepage from '../Pages/Homepage'
-import IntSignUp from '../Pages/IntSignUp'
-import Mainpage from '../Pages/Mainpage'
-import Jobs from '../Pages/Jobs'
+import Homepage from '../../pages/Homepage'
+import IntSignUp from '../../pages/IntSignUp'
+import Mainpage from '../../pages/Mainpage'
+import Jobs from '../../pages/Jobs'
 import Sidebar from '../Sidebar'
 
 function AllRoutes() {
@@ -19,4 +19,4 @@ function AllRoutes() {
   )
 }
 
-export default AllRoutes
+export default AllRoutes;

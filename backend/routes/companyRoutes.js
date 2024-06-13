@@ -43,6 +43,7 @@ companyControl.post(
             username: req.body.username,
             password: hashedPassword,
             website: req.body.website,
+            image: req.body.image,
             description: req.body.description,
             hiring: req.body.hiring
         });

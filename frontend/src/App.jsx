@@ -1,8 +1,6 @@
 import './App.css'
-import Sidebar from './components/Sidebar';
-import AllRoutes from './components/routes/AllRoutes'
+import AllRoutes from './components/Routes/AllRoutes'
 import { ChakraProvider, extendTheme } from '@chakra-ui/react'
-import { useLocation } from 'react-router-dom';
 
 const customTheme = extendTheme({
   breakpoints: {
@@ -16,11 +14,6 @@ const customTheme = extendTheme({
 });
 
 function App() {
-
-  const location = useLocation();
-  const pathname = location.pathname;
-  const lastSegment = pathname.substring(pathname.lastIndexOf('/') + 1);
-  const shouldShowSidebar = pathname.startsWith('/jobs') || pathname === '/browse';
 
   return (
     <>

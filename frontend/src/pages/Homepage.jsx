@@ -1,11 +1,9 @@
 import React from "react";
 import { Box, Button, Stack } from "@chakra-ui/react";
-import HeroImg from "../../assets/Hero.png";
-import HomeNavbar from "../HomeNavbar";
-import HomeFAQ from "../HomeFaq";
-import Footer from "../Footer";
-import HomeCompany from "../HomeCompany";
-import Sidebar from "../Sidebar";
+import HomeNavbar from "../components/Home/HomeNavbar";
+import HomeFAQ from "../components/Home/HomeFaq";
+import Footer from "../components/Footer/Footer";
+import HomeCompany from "../components/Home/HomeCompany";
 
 function Homepage() {
   return (

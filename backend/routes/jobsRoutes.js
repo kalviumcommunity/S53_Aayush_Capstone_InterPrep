@@ -57,8 +57,8 @@ jobControl.post(
     validateJob,
     jwtVerify,
     wrapAsync(async (req, res) => {
-        let { role, description, salary, timing, place, experience, notice, username } = req.body;
-        let newJobData = { role, description, salary, timing, place, experience, notice };
+        let { role, description, salary, timing, place, experience, notice, type, username } = req.body;
+        let newJobData = { role, description, salary, type, timing, place, experience, notice };
         let newJob = new Jobs(newJobData);
         let company = await Company.findOne({username:username});
         if (company){
