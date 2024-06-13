@@ -1,10 +1,10 @@
 import React from "react";
-import comp1 from "../assets/Company/Amazon.png";
-import comp2 from "../assets/Company/Apple.png";
-import comp3 from "../assets/Company/Google.png";
-import comp4 from "../assets/Company/Meta.png";
-import comp5 from "../assets/Company/Microsoft.png";
-import comp6 from "../assets/Company/Samsung.png";
+import comp1 from "../../assets/Company/Amazon.png";
+import comp2 from "../../assets/Company/Apple.png";
+import comp3 from "../../assets/Company/Google.png";
+import comp4 from "../../assets/Company/Meta.png";
+import comp5 from "../../assets/Company/Microsoft.png";
+import comp6 from "../../assets/Company/Samsung.png";
 import { Grid, Image, Text } from "@chakra-ui/react";
 
 function ImageGrid() {

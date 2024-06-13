@@ -1,6 +1,6 @@
 import React, { memo } from "react";
 import { Box, Button, Flex, HStack, Image, Text } from "@chakra-ui/react";
-import RoboImg from "../../assets/Robo.png"
+import RoboImg from "../assets/Robo.png"
 import {ArrowForwardIcon} from "@chakra-ui/icons"
 
 function Mainpage() {

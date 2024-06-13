@@ -1,5 +1,4 @@
 "use client";
-
 import {
   Box,
   Container,
@@ -11,7 +10,7 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import { ReactNode } from "react";
-import LogoImg from "../assets/Logo.png";
+import LogoImg from "../../assets/Logo.png";
 
 const Logo = () => {
   return <img src={LogoImg} id="logo-img" />;

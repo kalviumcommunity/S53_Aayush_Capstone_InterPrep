@@ -1,5 +1,4 @@
 import {
-  Button,
   Card,
   CardBody,
   CardFooter,
@@ -13,22 +12,26 @@ import {
   Text,
 } from "@chakra-ui/react";
 import React from "react";
-import Samsung from "../assets/Samsung.svg";
+import Samsung from "../../assets/Samsung.svg";
 import { AiOutlineDollar, AiOutlineUser } from "react-icons/ai";
 import { MdOutlineWork, MdAccessTime } from "react-icons/md";
 import { IoLocationOutline } from "react-icons/io5";
 import { TbFileCertificate, TbCalendarTime } from "react-icons/tb";
 import { FaArrowRightLong } from "react-icons/fa6";
 
-function JobBox({data}) {
+function JobBox({ data }) {
   const JobInfo = [
     { name: `${data.salary}`, icon: AiOutlineDollar, flex: "" },
-    { name: `${data.experience} experience`, icon: TbFileCertificate, flex: "" },
+    {
+      name: `${data.experience} experience`,
+      icon: TbFileCertificate,
+      flex: "",
+    },
     { name: `${data.notice} Notice period`, icon: TbCalendarTime, flex: "" },
     { name: `${data.applied.length} Applied`, icon: AiOutlineUser, flex: "" },
     { name: `${data.place}`, icon: IoLocationOutline, flex: "" },
-    { name: `${data.timing}`, icon: MdOutlineWork, flex: "" },
-    { name: `Time : 11:00 a.m. - 7:00 p.m. IST`, icon: MdAccessTime, flex: "" },
+    { name: `${data.type}`, icon: MdOutlineWork, flex: "" },
+    { name: `${data.timing}`, icon: MdAccessTime, flex: "" },
   ];
 
   return (
@@ -38,7 +41,7 @@ function JobBox({data}) {
       bg={"#FFFFFF15"}
       color={"#FFFFFF"}
       p={{ base: "1", sm: "2" }}
-      borderRadius={'12px'}
+      borderRadius={"12px"}
     >
       <Flex
         alignContent={"center"}
@@ -60,7 +63,7 @@ function JobBox({data}) {
             fontFamily={"Didact Gothic"}
             fontSize={{ base: "1rem", md: "1.4rem" }}
           >
-          {data.role}
+            {data.role}
           </Heading>
 
           <Text
@@ -73,7 +76,11 @@ function JobBox({data}) {
           </Text>
 
           <Grid
-            templateColumns={{ base: "repeat(2, 1fr)", sm: 'repeat(3, 1fr)', md: "repeat(4, 1fr)" }}
+            templateColumns={{
+              base: "repeat(2, 1fr)",
+              sm: "repeat(3, 1fr)",
+              md: "repeat(4, 1fr)",
+            }}
             gap={5}
             mt={5}
           >
@@ -103,17 +110,17 @@ function JobBox({data}) {
           </Grid>
           <CardFooter
             p={1}
-            display={"flex"}
-            justifyContent={"flex-end"}
-            alignItems={"center"}
           >
             <Icon
               fontSize="1.8rem"
               as={FaArrowRightLong}
               cursor={"pointer"}
-              transition={'all 0.3s'}
+              transition={"all 0.3s"}
+              position={"absolute"}
+              bottom={6}
+              right={8}
               _hover={{
-                transform:'translate(4px)',
+                transform: "translate(4px)",
               }}
             />
           </CardFooter>
