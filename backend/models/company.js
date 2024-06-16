@@ -20,8 +20,14 @@ const companySchema = new Schema({
         required: true
     },
     description: {
-        type: String,
-        required: true
+        culture: {
+            type: String,
+            required: true
+        },
+        values: {
+            type: String,
+            required: true
+        }
     },
     jobs: [{
         type: Schema.Types.ObjectId,

@@ -72,7 +72,7 @@ companyControl.post(
                 let token = jwt.sign(
                     {
                         username: companyFind.username,
-                        name: companyFind.name,
+                        name: companyFind.company,
                         type: "Company"
                     },
                     process.env.JWT_PASS

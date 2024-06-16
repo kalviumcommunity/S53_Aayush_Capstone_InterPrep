@@ -3,8 +3,9 @@ import { Route, Routes } from 'react-router-dom'
 import Homepage from '../../pages/Homepage'
 import IntSignUp from '../../pages/IntSignUp'
 import Mainpage from '../../pages/Mainpage'
-import Jobs from '../../pages/Jobs'
 import Sidebar from '../Sidebar'
+import JobInfo from '../../pages/JobInfo'
+import Jobs from '../../pages/Jobs'
 
 function AllRoutes() {
   return (
@@ -14,6 +15,7 @@ function AllRoutes() {
         <Route path='/interviewer/signup' element={<IntSignUp />}/>
         <Route path='/browse' element={<Mainpage />}/>
         <Route path='/jobs' element={<Sidebar children={<Jobs />}/>}/>
+        <Route path='/jobs/:id' element={<Sidebar children={<JobInfo />}/>} />
     </Routes>
     </>
   )
