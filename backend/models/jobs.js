@@ -4,6 +4,10 @@ const formatDate = require('../utils/formatDate');
 
 const jobSchema = new Schema({
     company: {
+        type: Schema.Types.ObjectId,
+        ref: "Company"
+    },
+    name: {
         type: String,
         required: true
     },
@@ -12,8 +16,18 @@ const jobSchema = new Schema({
         required: true
     },
     description: {
-        type: String,
-        required: true
+        requirements: {
+            type: String,
+            required: true
+        },
+        responsibilties: {
+            type: String,
+            required: true
+        },
+        process: {
+            type: String,
+            required: true
+        }
     },
     salary: {
         type: String,

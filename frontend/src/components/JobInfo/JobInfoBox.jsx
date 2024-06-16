@@ -1,8 +1,8 @@
-import React from "react";
+import React from 'react'
 import {
+  Button,
   Card,
   CardBody,
-  CardFooter,
   Flex,
   Grid,
   GridItem,
@@ -12,16 +12,12 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/react";
-import Samsung from "../../assets/Samsung.svg";
 import { AiOutlineDollar, AiOutlineUser } from "react-icons/ai";
 import { MdOutlineWork, MdAccessTime } from "react-icons/md";
 import { IoLocationOutline } from "react-icons/io5";
 import { TbFileCertificate, TbCalendarTime } from "react-icons/tb";
-import { FaArrowRightLong } from "react-icons/fa6";
-import { useNavigate } from 'react-router-dom';
 
-function JobBox({ data }) {
-  const navigate = useNavigate()
+function JobInfoBox({ data }) {
   const JobInfo = [
     { name: `${data.salary}`, icon: AiOutlineDollar, flex: "" },
     {
@@ -35,11 +31,6 @@ function JobBox({ data }) {
     { name: `${data.type}`, icon: MdOutlineWork, flex: "" },
     { name: `${data.timing}`, icon: MdAccessTime, flex: "" },
   ];
-  console.log(data.company);
-  const handleArrow = () => {
-    navigate(`/jobs/${data._id}`)
-  }
-
   return (
     <Card
       direction={{ base: "column", sm: "row" }}
@@ -48,6 +39,7 @@ function JobBox({ data }) {
       color={"#FFFFFF"}
       p={{ base: "1", sm: "2" }}
       borderRadius={"12px"}
+      width={{md:'75vw'}}
     >
       <Flex
         alignContent={"center"}
@@ -69,8 +61,28 @@ function JobBox({ data }) {
             size="md"
             fontFamily={"Didact Gothic"}
             fontSize={{ base: "1rem", md: "1.4rem" }}
+            style={{display:'flex', justifyContent:'space-between', alignItems:"center"}}
           >
             {data.role}
+            <Button
+            as={"a"}
+            fontSize={"16px"}
+            width={{base:"80px", md:"140px"}}
+            height="40px"
+            color={"white"}
+            bg={"#FFFFFF10"}
+            href={"#"}
+            borderRadius="38"
+            borderBottom={"2px solid white"}
+            _hover={{
+              boxShadow: "0 6px 12px 0 #ffffff60",
+            }}
+            _active={{
+              bg:"#FFFFFF20"
+            }}
+            fontFamily="Didact Gothic">
+              Apply
+            </Button>
           </Heading>
 
           <Text
@@ -79,7 +91,7 @@ function JobBox({ data }) {
             fontWeight={"bold"}
             fontSize={{ base: "1rem", md: "1.2rem" }}
           >
-            {data.name}
+          {data.name}
           </Text>
 
           <Grid
@@ -115,27 +127,10 @@ function JobBox({ data }) {
               alignItems={"center"}
             ></GridItem>
           </Grid>
-          <CardFooter
-            p={1}
-          >
-            <Icon
-              fontSize="1.8rem"
-              as={FaArrowRightLong}
-              cursor={"pointer"}
-              transition={"all 0.3s"}
-              position={"absolute"}
-              bottom={6}
-              right={8}
-              onClick={handleArrow}
-              _hover={{
-                transform: "translate(4px)",
-              }}
-            />
-          </CardFooter>
         </CardBody>
       </Stack>
     </Card>
-  );
+  )
 }
 
-export default JobBox;
+export default JobInfoBox

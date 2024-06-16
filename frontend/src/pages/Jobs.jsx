@@ -14,28 +14,35 @@ import {
 import React, { useEffect, useState } from "react";
 import JobBox from "../components/Jobs/JobBox";
 import axios from "axios";
+import { CircleLoader } from "react-spinners";
+import { useNavigate } from "react-router-dom";
 
 function Jobs() {
   const [jobData, setJobData] = useState([]);
+  const [find, setFind] = useState("");
 
   useEffect(() => {
     setTimeout(() => {
       axios
-        .get(`${import.meta.env.VITE_server}jobs`)
+        .get(`${import.meta.env.VITE_server}jobs?filter=${find}`)
         .then((response) => {
-            setJobData(response.data);
-          })
+          setJobData(response.data);
+        })
         .catch((err) => {
           console.error(err);
         });
     }, 1000);
-  }, []);
+  }, [find]);
+
+  const handleFind = (e) => {
+    setFind(e.target.value);
+  };
 
   return (
     <HStack
-      display={'flex'}
-      justifyContent={{ base: 'center', md: 'flex-start' }}
-      backgroundColor={'#000'}
+      display={"flex"}
+      justifyContent={{ base: "center", md: "flex-start" }}
+      backgroundColor={"#000"}
     >
       <Flex
         flexDirection={"column"}
@@ -90,13 +97,28 @@ function Jobs() {
               fontFamily="Didact Gothic"
               placeholder="Search for Opportunities"
               borderRadius="10px"
+              onChange={handleFind}
               w={{ base: "18rem", md: "28rem" }}
             />
           </InputGroup>
         </Box>
-        <Box pb={{ base: "1", md: "4" }} display="flex" flexDirection="column" gap={10}>
+        <Box
+          pb={{ base: "1", md: "4" }}
+          display="flex"
+          flexDirection="column"
+          gap={10}
+        >
           {jobData.length === 0 ? (
-            <span>Loading...</span>
+            <Flex
+            position="absolute"
+            top="50%"
+            left="50%"
+            transform="translate(-50%, -50%)"
+            alignItems="center"
+            justifyContent="center"
+          >
+            <CircleLoader color="white" />
+          </Flex>
           ) : (
             jobData.map((e, i) => {
               return <JobBox data={e} key={i} />;
@@ -109,4 +131,3 @@ function Jobs() {
 }
 
 export default Jobs;
-

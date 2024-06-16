@@ -55,7 +55,7 @@ module.exports.companyValidation = Joi.object({
     image: Joi.string().required(),
     password: Joi.string().pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=.*[a-zA-Z]).{6,20}$/).required(),
     website: Joi.string().required(),
-    description: Joi.string().required(),
+    description: Joi.object().required(),
     dateJoined: Joi.string(),
     hiring: Joi.boolean()
 })
@@ -63,7 +63,7 @@ module.exports.companyValidation = Joi.object({
 module.exports.jobValidation = Joi.object({
     company: Joi.string(),
     role: Joi.string().required(),
-    description: Joi.string().required(),
+    description: Joi.object(),
     salary: Joi.string().required(),
     timing: Joi.string().required(),
     type: Joi.string().required(),
