@@ -1,6 +1,6 @@
 import React, { memo } from "react";
 import { Box, Button, Flex, HStack, Image, Text } from "@chakra-ui/react";
-import RoboImg from "../../assets/Robo.png"
+import RoboImg from "../assets/Robo.png"
 import {ArrowForwardIcon} from "@chakra-ui/icons"
 
 function Mainpage() {
@@ -18,7 +18,6 @@ function Mainpage() {
       top="20"
       position="absolute"
       color={"white"}
-
     >
       <Box display={"flex"} gap={5} flexDirection={{base:"column", md:"row"}}>
         <Box bg="rgba(250,250,250, 10%)" display={"flex"} p={{base:"5", md:"10"}} style={{borderRadius:"10px"}}

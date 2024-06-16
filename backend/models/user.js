@@ -38,16 +38,16 @@ const userSchema = new Schema({
     },
     posts: [{
         type: Schema.Types.ObjectId,
-        ref: "Post"
+        ref: "Posts"
+    }],
+    jobsApplied: [{
+        type: Schema.Types.ObjectId,
+        ref: "Jobs"
     }],
     dateJoined: {
         type: String,
         default: formatDate
     },
-    type: {
-        type: String,
-        default: "User"
-    }
 });
 
 const User = mongoose.model("User", userSchema);

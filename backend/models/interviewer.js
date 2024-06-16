@@ -67,10 +67,6 @@ const interviewerSchema = new Schema({
     dateJoined: {
         type: String,
         default: formatDate
-    },
-    type: {
-        type: String,
-        default: "Interviewer"
     }
 });
 

@@ -1,9 +1,8 @@
 import React from 'react'
-import UserSignup from '../InterviewSignup'
-import Footer from '../Footer'
+import Footer from '../components/Footer/Footer'
 import { Flex, Image } from '@chakra-ui/react'
-import Logo2 from '../../assets/Logo2.png'
-import InterviewSignup from '../InterviewSignup'
+import Logo2 from '../assets/Logo2.png'
+import InterviewSignup from '../components/Signup/Interviewer/InterviewSignup'
 
 function IntSignUp() {
   return (

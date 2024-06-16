@@ -24,7 +24,7 @@ import {
   uploadBytesResumable,
   getDownloadURL,
 } from "firebase/storage";
-import app from "../firebase";
+import app from "../../../utils/firebase";
 import axios from "axios";
 import { InfoOutlineIcon } from "@chakra-ui/icons";
 import { MdCloudUpload } from "react-icons/md";

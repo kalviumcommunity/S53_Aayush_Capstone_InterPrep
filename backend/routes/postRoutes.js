@@ -18,9 +18,14 @@ const jwtVerify = (req, res, next) => {
     try {
         let { authorization } = req.headers;
         let result = jwt.verify(authorization, process.env.JWT_PASS);
-        if (result) {
+        if (result && (result.type == "User")) {
             req.body.username = result.username;
             next();
+        }else{
+            throw new ExpressError(
+                403,
+                "Invalid Token"
+            )
         }
     } catch (err) {
         throw new ExpressError(
@@ -69,7 +74,7 @@ postControl.post(
         let newPost = new Post(newPostData);
         let user = await User.findOne({ username: username });
         if (user) {
-            newPost.user = user;
+            newPost.user = username;
             newPost.save();
             user.posts.push(newPost);
             user.save();
@@ -175,14 +180,16 @@ postControl.delete(
         if (!foundUser) {
             throw new ExpressError(404, "User not found");
         }
-        let deletePost = await Post.findById(id).populate('user');
+        let deletePost = await Post.findById(id);
         if (!deletePost) {
             throw new ExpressError(404, "Post not Found!")
         };
-        if (deletePost.user.username != foundUser.username) {
+        if (deletePost.user != foundUser.username) {
             throw new ExpressError(403, "Unauthorized Request!")
         }
         await Post.findByIdAndDelete(id);
+        foundUser.posts.pull(id);
+        await foundUser.save();
         res.send("Post deleted successfully");
     })
 );

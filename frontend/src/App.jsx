@@ -1,8 +1,7 @@
 import './App.css'
-import Sidebar from './components/Sidebar';
-import AllRoutes from './components/routes/AllRoutes'
+import AllRoutes from './components/Routes/AllRoutes'
 import { ChakraProvider, extendTheme } from '@chakra-ui/react'
-import { useLocation } from 'react-router-dom';
+import { Toaster } from 'sonner'
 
 const customTheme = extendTheme({
   breakpoints: {
@@ -17,17 +16,10 @@ const customTheme = extendTheme({
 
 function App() {
 
-  const location = useLocation();
-  const pathname = location.pathname;
-  const lastSegment = pathname.substring(pathname.lastIndexOf('/') + 1);
-  const shouldShowSidebar = lastSegment === 'hello' || lastSegment === 'browse';
-
-
-
   return (
     <>
     <ChakraProvider theme={customTheme}>
-    {shouldShowSidebar && <Sidebar />}
+      <Toaster richColors position="top-center"/>
       <AllRoutes />
     </ChakraProvider>
     </>

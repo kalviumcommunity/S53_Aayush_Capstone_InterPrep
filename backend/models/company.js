@@ -11,11 +11,33 @@ const companySchema = new Schema({
         type: String,
         required: true
     },
+    password: {
+        type: String,
+        required: true
+    },
     website: {
         type: String,
         required: true
     },
     description: {
+        culture: {
+            type: String,
+            required: true
+        },
+        values: {
+            type: String,
+            required: true
+        }
+    },
+    jobs: [{
+        type: Schema.Types.ObjectId,
+        ref: "Jobs"
+    }],
+    hiring: {
+        type: Boolean,
+        default: false
+    },
+    image: {
         type: String,
         required: true
     },
@@ -23,10 +45,6 @@ const companySchema = new Schema({
         type: String,
         default: formatDate
     },
-    hiring: {
-        type: Boolean,
-        default: false
-    }
 });
 
 const Company = mongoose.model("Company", companySchema);
