@@ -25,22 +25,22 @@ function ImageGrid() {
         <Image
           src={comp1}
           alt=""
-          boxSize="130px"
-          height="45px"
+          boxSize="120px"
+          height="40px"
           marginBottom={["10px", "10px", "0px"]}
         />
         <Image
           src={comp2}
           alt=""
-          boxSize="130px"
-          height="40px"
+          boxSize="120px"
+          height="35px"
           marginBottom={["10px", "10px", "0px"]}
         />
         <Image
           src={comp3}
           alt=""
-          boxSize="130px"
-          height="45px"
+          boxSize="120px"
+          height="40px"
           marginBottom={["10px", "10px", "0px"]}
         />
         <Image
@@ -53,15 +53,15 @@ function ImageGrid() {
         <Image
           src={comp5}
           alt=""
-          boxSize="180px"
-          height="40px"
+          boxSize="150px"
+          height="35px"
           marginBottom={["10px", "10px", "0px"]}
         />
         <Image
           src={comp6}
           alt=""
-          boxSize="160px"
-          height="30px"
+          boxSize="140px"
+          height="25px"
           marginBottom={["10px", "10px", "0px"]}
         />
       </Grid>

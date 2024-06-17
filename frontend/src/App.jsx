@@ -1,5 +1,5 @@
 import './App.css'
-import AllRoutes from './components/routes/AllRoutes';
+import AllRoutes from '../src/components/Routes/AllRoutes';
 import { ChakraProvider, extendTheme } from '@chakra-ui/react'
 import { Toaster } from 'sonner'
 
