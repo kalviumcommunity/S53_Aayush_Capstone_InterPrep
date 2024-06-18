@@ -100,6 +100,7 @@ function JobInfo() {
           pb={{ base: "1", md: "4" }}
           display="flex"
           flexDirection="column"
+          justifyContent={"center"}
           gap={5}
         >
           {data === undefined ? (
