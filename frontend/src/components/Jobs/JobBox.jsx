@@ -48,10 +48,10 @@ function JobBox({ data }) {
       color={"#FFFFFF"}
       p={{ base: "1", sm: "2" }}
       borderRadius={"12px"}
+      width={{'md':'75vw'}}
     >
       <Flex
         alignContent={"center"}
-        justifyContent={"center"}
         alignItems={"center"}
       >
         <Image
