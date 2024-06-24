@@ -7,13 +7,13 @@ import {
   Stack,
   Collapse,
   Icon,
-  Link,
   Popover,
   PopoverTrigger,
   PopoverContent,
   useColorModeValue,
-  useBreakpointValue,
   useDisclosure,
+  Link as ChakraLink,
+  background,
 } from "@chakra-ui/react";
 import {
   HamburgerIcon,
@@ -21,6 +21,7 @@ import {
   ChevronDownIcon,
   ChevronRightIcon,
 } from "@chakra-ui/icons";
+import { Link } from "react-router-dom";
 import Logo from "../../assets/Logo.png";
 
 export default function HomeNavbar() {
@@ -35,6 +36,7 @@ export default function HomeNavbar() {
         py={{ base: 2 }}
         px={{ base: 4 }}
         align={"center"}
+        fontFamily="Didact Gothic"
       >
         <Flex
           flex={{ base: 1, md: "auto" }}
@@ -73,14 +75,14 @@ export default function HomeNavbar() {
           spacing={6}
         >
           <Button
-            as={"a"}
+            as={Link}
             display={{ base: "none", md: "inline-flex" }}
             fontSize={"16px"}
             width="140px"
             height="40px"
             color={"white"}
             bg={"black"}
-            href={"#"}
+            to={'/'}
             borderRadius="38"
             borderBottom={"2px solid #00E0FF"}
             _hover={{
@@ -88,6 +90,7 @@ export default function HomeNavbar() {
               boxShadow: "0 6px 12px 0 #00E0FF70",
             }}
             fontFamily="Didact Gothic"
+            fontWeight="bold"
           >
             Get started
           </Button>
@@ -103,8 +106,8 @@ export default function HomeNavbar() {
 
 const DesktopNav = () => {
   const linkColor = useColorModeValue("#999999");
-  const linkHoverColor = useColorModeValue("gray.300", "white");
-  const popoverContentBgColor = useColorModeValue("white", "gray.800");
+  const linkHoverColor = useColorModeValue("#fffff2 ");
+  const popoverContentBgColor = useColorModeValue("#FFFFFF40");
 
   return (
     <Stack direction={"row"} spacing={4}>
@@ -112,31 +115,34 @@ const DesktopNav = () => {
         <Box key={navItem.label}>
           <Popover trigger={"hover"} placement={"bottom-start"}>
             <PopoverTrigger>
-              <Link
+              <Box
                 p={2}
-                href={navItem.href ?? "#"}
-                fontSize={"md"}
+                fontSize={"1.2rem"}
                 letterSpacing="0.5px"
-                fontWeight={100}
+                fontWeight={"bold"}
                 color={linkColor}
-                fontFamily={"FranklinGoth"}
+                fontFamily={"Didact Gothic"}
+          transition={"all .3s ease"}
                 _hover={{
                   textDecoration: "none",
                   color: linkHoverColor,
+                  cursor: navItem.children ? "pointer" : "default",
                 }}
               >
                 {navItem.label}
-              </Link>
+              </Box>
             </PopoverTrigger>
 
             {navItem.children && (
               <PopoverContent
                 border={0}
                 boxShadow={"xl"}
+                backdropFilter= "blur(8px)"
                 bg={popoverContentBgColor}
                 p={4}
                 rounded={"xl"}
                 minW={"sm"}
+
               >
                 <Stack>
                   {navItem.children.map((child) => (
@@ -152,26 +158,33 @@ const DesktopNav = () => {
   );
 };
 
+
 const DesktopSubNav = ({ label, href, subLabel }) => {
   return (
     <Link
-      href={href}
+      to={`/${href}`}
       role={"group"}
       display={"block"}
       p={2}
       rounded={"md"}
-      _hover={{ bg: useColorModeValue("pink.50", "gray.900") }}
+      bg={"#FFFFFF15"}
+      _hover={{ bg: useColorModeValue("white") }}
+      fontFamily="Didact Gothic"
+      fontWeight="bold"
     >
       <Stack direction={"row"} align={"center"}>
         <Box>
           <Text
+            color={"#ffffff"}
             transition={"all .3s ease"}
-            _groupHover={{ color: "pink.400" }}
-            fontWeight={500}
+            fontWeight={"bold"}
+            fontFamily="Didact Gothic"
           >
             {label}
           </Text>
-          <Text fontSize={"sm"}>{subLabel}</Text>
+          <Text fontSize={"0.9rem"} color={"#ffffff"}fontFamily="Didact Gothic">
+            {subLabel}
+          </Text>
         </Box>
         <Flex
           transition={"all .3s ease"}
@@ -182,20 +195,17 @@ const DesktopSubNav = ({ label, href, subLabel }) => {
           align={"center"}
           flex={1}
         >
-          <Icon color={"pink.400"} w={5} h={5} as={ChevronRightIcon} />
+          <Icon color={"white"} w={5} h={5} as={ChevronRightIcon} />
         </Flex>
       </Stack>
     </Link>
   );
 };
 
+
 const MobileNav = () => {
   return (
-    <Stack
-      bg={useColorModeValue("white", "gray.800")}
-      p={4}
-      display={{ md: "none" }}
-    >
+    <Stack bg={"#FFFFFF15"} p={4} display={{ md: "none" }}>
       {NAV_ITEMS.map((navItem) => (
         <MobileNavItem key={navItem.label} {...navItem} />
       ))}
@@ -210,23 +220,23 @@ const MobileNavItem = ({ label, children, href }) => {
     <Stack spacing={4} onClick={children && onToggle}>
       <Flex
         py={2}
-        as={Link}
-        href={href ?? "#"}
         justify={"space-between"}
         align={"center"}
         _hover={{
           textDecoration: "none",
         }}
+        as={children ? Box : ChakraLink}
+        to={href}
+        fontFamily="Didact Gothic"
+        fontWeight="bold"
       >
-        <Text
-          fontWeight={600}
-          color={useColorModeValue("gray.600", "gray.200")}
-        >
+        <Text fontWeight={"bold"} color={"#FFFFFF"} fontFamily="Didact Gothic">
           {label}
         </Text>
         {children && (
           <Icon
             as={ChevronDownIcon}
+            color={"white"}
             transition={"all .25s ease-in-out"}
             transform={isOpen ? "rotate(180deg)" : ""}
             w={6}
@@ -236,19 +246,12 @@ const MobileNavItem = ({ label, children, href }) => {
       </Flex>
 
       <Collapse in={isOpen} animateOpacity style={{ marginTop: "0!important" }}>
-        <Stack
-          mt={2}
-          pl={4}
-          borderLeft={1}
-          borderStyle={"solid"}
-          borderColor={useColorModeValue("gray.200", "gray.700")}
-          align={"start"}
-        >
+        <Stack pl={4} fontFamily="Didact Gothic" fontWeight="bold" borderLeft={1} mb={4} borderStyle={"solid"} borderColor={"#FFFFFF90"} color={"#FFFFFF"} align={"start"}>
           {children &&
             children.map((child) => (
-              <Link key={child.label} py={2} href={child.href}>
+              <ChakraLink key={child.label} py={2} to={child.href} fontFamily="Didact Gothic" fontWeight="bold">
                 {child.label}
-              </Link>
+              </ChakraLink>
             ))}
         </Stack>
       </Collapse>
@@ -263,12 +266,12 @@ const NAV_ITEMS = [
       {
         label: "Explore Design Work",
         subLabel: "Trending Design to inspire you",
-        href: "#",
+        href: "jobs",
       },
       {
         label: "New & Noteworthy",
         subLabel: "Up-and-coming Designers",
-        href: "#",
+        href: "jobs",
       },
     ],
   },
@@ -278,12 +281,12 @@ const NAV_ITEMS = [
       {
         label: "Job Board",
         subLabel: "Find your dream design job",
-        href: "#",
+        href: "jobs",
       },
       {
         label: "Freelance Projects",
         subLabel: "An exclusive list for contract work",
-        href: "#",
+        href: "jobs",
       },
     ],
   },
