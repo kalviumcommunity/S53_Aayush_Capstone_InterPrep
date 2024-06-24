@@ -170,6 +170,30 @@ postControl.post(
     })
 );
 
+postControl.put(
+    "/update/:id",
+    validatePost,
+    jwtVerify,
+    wrapAsync(async (req, res) => {
+        const { username, description } = req.body;
+        const { id } = req.params;
+
+        const updatePost = await Post.findById(id);
+        if (!updatePost) {
+            throw new ExpressError(404, "Post not found");
+        }
+
+        if (updatePost.user !== username) {
+            throw new ExpressError(403, "Unauthorized to update this post");
+        }
+
+        updatePost.description = description;
+        await updatePost.save();
+
+        res.send("Post updated successfully");
+    })
+);
+
 postControl.delete(
     "/delete/:id",
     jwtVerify,
