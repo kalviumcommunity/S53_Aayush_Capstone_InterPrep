@@ -23,17 +23,22 @@ function Jobs() {
   const [typingTimeout, setTypingTimeout] = useState(0);
 
   useEffect(() => {
+    let timeoutId;
+  
     if (typingTimeout) {
       clearTimeout(typingTimeout);
     }
-
-    setTypingTimeout(
-      setTimeout(() => {
-        fetchData();
-      }, 1000)
-    );
-    return () => clearTimeout(typingTimeout);
-  }, [find]);
+  
+    timeoutId = setTimeout(() => {
+      fetchData();
+    }, 1000);
+  
+    return () => {
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+    };
+  }, [find, typingTimeout]);
 
   const fetchData = () => {
     axios
