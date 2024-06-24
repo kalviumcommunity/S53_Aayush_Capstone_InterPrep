@@ -34,7 +34,6 @@ function JobBox({ data }) {
     { name: `${data.type}`, icon: MdOutlineWork, flex: "" },
     { name: `${data.timing}`, icon: MdAccessTime, flex: "" },
   ];
-  console.log(data.company);
   const handleArrow = () => {
     navigate(`/jobs/${data._id}`)
   }
