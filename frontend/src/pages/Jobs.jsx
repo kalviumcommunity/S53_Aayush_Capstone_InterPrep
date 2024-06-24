@@ -20,19 +20,31 @@ import { Link } from "react-router-dom";
 function Jobs() {
   const [jobData, setJobData] = useState([]);
   const [find, setFind] = useState("");
+  const [typingTimeout, setTypingTimeout] = useState(0);
 
   useEffect(() => {
-    setTimeout(() => {
-      axios
-        .get(`${import.meta.env.VITE_server}jobs?filter=${find}`)
-        .then((response) => {
-          setJobData(response.data);
-        })
-        .catch((err) => {
-          console.error(err);
-        });
-    }, 1000);
+    if (typingTimeout) {
+      clearTimeout(typingTimeout);
+    }
+
+    setTypingTimeout(
+      setTimeout(() => {
+        fetchData();
+      }, 1000)
+    );
+    return () => clearTimeout(typingTimeout);
   }, [find]);
+
+  const fetchData = () => {
+    axios
+      .get(`${import.meta.env.VITE_server}jobs?filter=${find}`)
+      .then((response) => {
+        setJobData(response.data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
 
   const handleFind = (e) => {
     setFind(e.target.value);
