@@ -1,0 +1,26 @@
+meta {
+  name: NewCompany
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{API_URL}}/company/signup
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+      "company": "Sample Company Inc.",
+      "username": "samplecompany",
+      "password": "Password#123",
+      "website": "https://www.samplecompany.com",
+      "description": {
+          "culture": "Innovative and collaborative workplace",
+          "values": "Customer-centric and integrity-driven"
+      },
+      "hiring": true,
+      "image": "https://www.samplecompany.com/logo.png"
+  }
+}
