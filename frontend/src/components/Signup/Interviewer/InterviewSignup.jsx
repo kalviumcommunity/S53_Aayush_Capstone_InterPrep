@@ -15,6 +15,7 @@ import {
   FormHelperText,
   InputRightElement,
   Tooltip,
+  Text,
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import { useToast } from "@chakra-ui/react";
@@ -131,7 +132,7 @@ const Form1 = ({ register, errors }) => {
         <p className="err">{errors.phone && errors.phone.message}</p>
       </FormControl>
 
-      <FormControl isRequired>
+      <FormControl id="password" isRequired>
         <FormLabel htmlFor="password" fontWeight="normal" mt="2%" color="white">
           Password &nbsp;
           <Tooltip
@@ -215,13 +216,13 @@ const Form2 = ({
     const storage = getStorage(app);
     const folder = fileType === "cv";
     const fileName = new Date().getTime() + file.name;
+    console.log(fileName);
     const storageRef = ref(storage, folder + fileName);
     const uploadTask = uploadBytesResumable(storageRef, file);
 
     uploadTask.on(
       "state_changed",
       (snapshot) => {
-        // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
         const progress =
           (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
         console.log("Upload is " + progress + "% done");
@@ -326,6 +327,25 @@ const Form2 = ({
         </FormControl>
       </Flex>
 
+      <FormControl mt="2%" isRequired>
+        <FormLabel htmlFor="mastery" fontWeight="normal" color="white" display={'flex'}>
+          Mastery 
+        </FormLabel>
+        <Text mb="2%" color={"#ffffff80"} fontSize={'1rem'}>Format eg - backend, dsa, mern, ...</Text>
+        <Input
+          id="mastery"
+          type="text"
+          placeholder="frontend, react, django, ..."
+          {...register("mastery", {
+            required: "Mastery is required",
+          })}
+          color="white"
+        />
+        <p className="err">
+          {errors.mastery && errors.mastery.message}
+        </p>
+      </FormControl>
+
       <FormControl mt="3%" isRequired>
         <FormLabel htmlFor="cv" fontWeight="normal" color="white">
           Please Upload your CV
@@ -345,7 +365,7 @@ const Form2 = ({
               setCV((prev) => e.target.files[0]);
               console.log(e.target.files[0].name);
             }}
-            disabled={isFileUploaded} // Disable input when file is uploaded
+            disabled={isFileUploaded}
           />
         </label>
         {isFileUploaded ? (
@@ -355,12 +375,12 @@ const Form2 = ({
             onClick={handleUpload}
             isLoading={isLoading}
             loadingText="Uploading ..."
-            disabled={isFileUploaded} // Disable button when file is uploaded
+            disabled={isFileUploaded}
           >
             Upload CV
           </Button>
         )}
-        {!isFileUploaded && ( // Only render error if file is not uploaded
+        {!isFileUploaded && (
           <p className="err">{errors.cv && errors.cv.message}</p>
         )}
       </FormControl>
@@ -376,16 +396,16 @@ const Form3 = ({ register, errors }) => {
       </Heading>
       <SimpleGrid columns={1} spacing={6}>
         <FormControl isRequired mt="3%">
-          <FormLabel htmlFor="reason" fontWeight="normal" color="white">
-            Why do you want to be an interviewer?
+          <FormLabel htmlFor="about" fontWeight="normal" color="white">
+            Can you tell a little about yourself?
           </FormLabel>
           <Textarea
-            id="reason"
+            id="about"
             mt="2%"
-            {...register("reason", { required: "Reason required" })}
+            {...register("about", { required: "Reason required" })}
             color="white"
           />
-          <p className="err">{errors.reason && errors.reason.message}</p>
+          <p className="err">{errors.about && errors.about.message}</p>
         </FormControl>
       </SimpleGrid>
     </>
@@ -408,9 +428,10 @@ export default function InterviewSignup() {
     password: "",
     image: "",
     info: { qualification: "", experience: "", working: "" },
-    phone: "",
-    email: "",
+    contact: { phone: "", email: ""},
     certificate: "",
+    about: "",
+    mastery: ""
   });
 
   const {
@@ -423,6 +444,8 @@ export default function InterviewSignup() {
   const onSubmit = async (data) => {
     setIsLoading(true);
     try {
+      const masteryArray = data.mastery.split(",").map(skill => skill.trim());
+      data.phone = parseInt(data.phone, 10);
       const updatedSendData = {
         username: data.username,
         name: data.name,
@@ -433,10 +456,13 @@ export default function InterviewSignup() {
           experience: data.experience,
           working: data.working,
         },
-        phone: data.phone,
-        email: data.email,
+        contact: {
+          phone: data.phone,
+          email: data.email,
+        },
         certificate: cvURL.cvUrl,
-        reason: data.reason,
+        about: data.about,
+        mastery: masteryArray
       };
 
       await new Promise((resolve) => {
@@ -446,7 +472,7 @@ export default function InterviewSignup() {
       });
 
       const response = await axios.post(
-        "http://localhost:8080/interviewer/signup",
+        `${import.meta.env.VITE_server}interviewer/signup`,
         updatedSendData
       );
 
@@ -489,7 +515,7 @@ export default function InterviewSignup() {
     if (isValid) {
       if (step < 2) {
         setStep((prevStep) => prevStep + 1);
-        console.log("New step:", step); // Log the new step value
+        console.log("New step:", step);
       }
       if (step == 2) {
         console.log("yes");

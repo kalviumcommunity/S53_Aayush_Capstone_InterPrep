@@ -12,7 +12,6 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/react";
-import Samsung from "../../assets/Samsung.svg";
 import { AiOutlineDollar, AiOutlineUser } from "react-icons/ai";
 import { MdOutlineWork, MdAccessTime } from "react-icons/md";
 import { IoLocationOutline } from "react-icons/io5";
@@ -48,14 +47,13 @@ function JobBox({ data }) {
       color={"#FFFFFF"}
       p={{ base: "1", sm: "2" }}
       borderRadius={"12px"}
-      width={{'md':'75vw'}}
+      width={{'lg':'75vw'}}
     >
       <Flex
-        alignContent={"center"}
-        alignItems={"center"}
+      justifyContent={"center"}
       >
         <Image
-          w={{ base: "80%", sm: "250px" }}
+          w={{ base: "100%", sm: "250px" }}
           h={"100%"}
           src={data.company.image}
           alt="Company Logo"
