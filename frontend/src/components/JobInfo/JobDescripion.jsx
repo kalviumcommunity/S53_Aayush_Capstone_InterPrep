@@ -22,7 +22,7 @@ function JobDescripion({ desc }) {
       bg={"#FFFFFF15"}
       color={"#FFFFFF"}
       p={{ base: "1", sm: "2" }}
-      width={{ md: "75vw" }}
+      width={{'lg':'75vw'}}
       borderRadius={"12px"}
     >
       <CardBody>

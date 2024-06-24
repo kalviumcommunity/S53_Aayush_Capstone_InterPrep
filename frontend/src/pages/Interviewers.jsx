@@ -6,38 +6,33 @@ import {
   BreadcrumbItem,
   BreadcrumbLink,
   Flex,
+  Grid,
   HStack,
   Input,
   InputGroup,
   InputLeftElement,
   Text,
 } from "@chakra-ui/react";
-import JobBox from "../components/Jobs/JobBox";
 import axios from "axios";
 import { CircleLoader } from "react-spinners";
+import InterviewerBox from "../components/Interviewer/InterviewerBox";
 import { Link } from "react-router-dom";
 
-function Jobs() {
-  const [jobData, setJobData] = useState([]);
-  const [find, setFind] = useState("");
-
+function Interviewers() {
+  const [ interviewers, setInterviewers] = useState([])
   useEffect(() => {
     setTimeout(() => {
       axios
-        .get(`${import.meta.env.VITE_server}jobs?filter=${find}`)
+        .get(`http://localhost:8080/interviewer/home`)
         .then((response) => {
-          setJobData(response.data);
+          setInterviewers(response.data);
         })
         .catch((err) => {
           console.error(err);
         });
     }, 1000);
-  }, [find]);
-
-  const handleFind = (e) => {
-    setFind(e.target.value);
-  };
-
+  }, []);
+  console.log(interviewers);
   return (
     <HStack
       display={"flex"}
@@ -80,13 +75,13 @@ function Jobs() {
                 fontSize={{ base: "0.95rem", md: "1.15rem" }}
                 fontWeight={900}
               >
-                Jobs
+                Interviewers
               </BreadcrumbLink>
             </BreadcrumbItem>
           </Breadcrumb>
         </Box>
         <Box pb={{ base: "1", md: "3" }}>
-          <Text fontSize={{ base: "1.2rem", md: "2rem" }}>All Jobs</Text>
+          <Text fontSize={{ base: "1.2rem", md: "2rem" }}>All Interviewers</Text>
         </Box>
         <Box pb={{ base: "1", md: "4" }}>
           <InputGroup>
@@ -96,39 +91,25 @@ function Jobs() {
             <Input
               type="text"
               fontFamily="Didact Gothic"
-              placeholder="Search for Opportunities"
+              placeholder="Search for Interviewer"
               borderRadius="10px"
-              onChange={handleFind}
               w={{ base: "18rem", md: "28rem" }}
             />
           </InputGroup>
         </Box>
-        <Box
-          pb={{ base: "1", md: "4" }}
-          display="flex"
-          flexDirection="column"
-          gap={10}
-        >
-          {jobData.length === 0 ? (
-            <Flex
-            position="absolute"
-            top="50%"
-            left="50%"
-            transform="translate(-50%, -50%)"
-            alignItems="center"
-            justifyContent="center"
-          >
-            <CircleLoader color="white" />
+          <Flex wrap={'wrap'} gap={10} justifyContent={{base:'center', md:'flex-start'}}>
+            <InterviewerBox />
+            <InterviewerBox />
+            <InterviewerBox />
+            <InterviewerBox />
+            <InterviewerBox />
+            <InterviewerBox />
+            <InterviewerBox />
+            <InterviewerBox />
           </Flex>
-          ) : (
-            jobData.map((e, i) => {
-              return <JobBox data={e} key={i} />;
-            })
-          )}
-        </Box>
       </Flex>
     </HStack>
-  );
+  )
 }
 
-export default Jobs;
+export default Interviewers

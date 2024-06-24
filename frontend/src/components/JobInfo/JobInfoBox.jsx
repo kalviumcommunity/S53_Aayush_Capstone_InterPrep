@@ -39,15 +39,13 @@ function JobInfoBox({ data }) {
       color={"#FFFFFF"}
       p={{ base: "1", sm: "2" }}
       borderRadius={"12px"}
-      width={{md:'75vw'}}
+      width={{'lg':'75vw'}}
     >
       <Flex
-        alignContent={"center"}
         justifyContent={"center"}
-        alignItems={"center"}
       >
         <Image
-          w={{ base: "80%", sm: "250px" }}
+          w={{ base: "100%", sm: "250px" }}
           h={"100%"}
           src={data.company.image}
           alt="Company Logo"

@@ -34,13 +34,14 @@ import {
   } from "@chakra-ui/icons";
   import Logo from "../assets/Logo.png"
 import { memo } from 'react';
+import { Link } from 'react-router-dom';
 
   const LinkItems = [
-    { name: 'Home', icon: FiHome },
-    { name: 'History', icon: MdOutlineHistoryToggleOff },
-    { name: 'Commmunity', icon: FiUsers },
-    { name: 'Saved', icon: FiBookmark },
-    { name: 'Stats', icon: FiTrendingUp },
+    { name: 'Home', icon: FiHome, to: '/' },
+    { name: 'History', icon: MdOutlineHistoryToggleOff, to: '' },
+    { name: 'Commmunity', icon: FiUsers, to: '' },
+    { name: 'Saved', icon: FiBookmark, to: '' },
+    { name: 'Stats', icon: FiTrendingUp, to: '' },
   ];
   
   const SidebarContent = ({ onClose, ...rest }) => {
@@ -55,12 +56,14 @@ import { memo } from 'react';
         padding={{base:"2rem 2rem", xsm:'1rem 1rem', md:'2rem 2rem'}}
         {...rest}>
         <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
+          <Link to={'/'}>
         <img src={Logo} id="logo-img" draggable="false" />
+          </Link>
           <CloseIcon display={{ base: 'flex', md: 'none' }} onClick={onClose} w={4} h={4} color="white"/>
         </Flex>
         <br /><br />
         {LinkItems.map((link) => (
-          <NavItem key={link.name} icon={link.icon}>
+          <NavItem key={link.name} icon={link.icon} to={link.to}>
             {link.name}
           </NavItem>
         ))}
@@ -68,11 +71,11 @@ import { memo } from 'react';
     );
   }
   
-  const NavItem = ({ icon, children, ...rest }) => {
+  const NavItem = ({ to, icon, children, ...rest }) => {
     return (
       <Box
-        as="a"
-        href="#"
+      as={Link}
+      to={`${to}`}
         style={{ textDecoration: 'none' }}
         _focus={{ boxShadow: 'none' }}
         >
