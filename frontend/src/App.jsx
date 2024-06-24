@@ -1,6 +1,6 @@
 import './App.css'
-import AllRoutes from '../src/components/routes/AllRoutes';
 import { ChakraProvider, extendTheme } from '@chakra-ui/react'
+import AllRoutes from '../src/components/routes/AllRoutes';
 import { Toaster } from 'sonner'
 
 const customTheme = extendTheme({
