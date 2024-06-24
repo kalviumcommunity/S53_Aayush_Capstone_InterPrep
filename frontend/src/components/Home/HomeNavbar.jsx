@@ -249,7 +249,7 @@ const MobileNavItem = ({ label, children, href }) => {
         <Stack pl={4} fontFamily="Didact Gothic" fontWeight="bold" borderLeft={1} mb={4} borderStyle={"solid"} borderColor={"#FFFFFF90"} color={"#FFFFFF"} align={"start"}>
           {children &&
             children.map((child) => (
-              <ChakraLink key={child.label} py={2} to={child.href} fontFamily="Didact Gothic" fontWeight="bold">
+              <ChakraLink key={child.label} py={2} as={Link} to={child.href} fontFamily="Didact Gothic" fontWeight="bold">
                 {child.label}
               </ChakraLink>
             ))}
