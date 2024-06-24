@@ -6,6 +6,7 @@ import Mainpage from '../../pages/Mainpage'
 import Sidebar from '../Sidebar'
 import JobInfo from '../../pages/JobInfo'
 import Jobs from '../../pages/Jobs'
+import Interviewers from '../../pages/Interviewers'
 
 function AllRoutes() {
   return (
@@ -16,6 +17,7 @@ function AllRoutes() {
         <Route path='/browse' element={<Mainpage />}/>
         <Route path='/jobs' element={<Sidebar children={<Jobs />}/>}/>
         <Route path='/jobs/:id' element={<Sidebar children={<JobInfo />}/>} />
+        <Route path='/interviewers' element={<Sidebar children={<Interviewers />} />}/>
     </Routes>
     </>
   )

@@ -42,27 +42,31 @@ const interviewerSchema = new Schema({
         type: String,
         required: true
     },
+    contact: {
+        phone: {
+            type: Number,
+            required: true,
+        },
+        email: {
+            type: String,
+            required: true,
+        }
+    },
     posts: [{
         type: Schema.Types.ObjectId,
         ref: "Post"
     }],
-    phone: {
-        type: Number,
-        required: true,
-        unique: true
-    },
-    email: {
+    about: {
         type: String,
-        required: true,
-        unique: true
-    },
-    reason: {
-        type: String,
-        required: "true"
+        required: true
     },
     verified: {
         type: Boolean,
         default: false
+    },
+    mastery: {
+        type: Array,
+        required: true,
     },
     dateJoined: {
         type: String,
