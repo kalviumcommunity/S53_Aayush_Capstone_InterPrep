@@ -7,6 +7,7 @@ import Sidebar from '../Sidebar'
 import JobInfo from '../../pages/JobInfo'
 import Jobs from '../../pages/Jobs'
 import Interviewers from '../../pages/Interviewers'
+import UserSignup from '../../pages/UserSignup'
 
 function AllRoutes() {
   return (
@@ -14,6 +15,7 @@ function AllRoutes() {
     <Routes>
         <Route path='/' element={<Homepage/>}/>
         <Route path='/interviewer/signup' element={<IntSignUp />}/>
+        <Route path='/user/signup' element={<UserSignup />}/>
         <Route path='/browse' element={<Mainpage />}/>
         <Route path='/jobs' element={<Sidebar children={<Jobs />}/>}/>
         <Route path='/jobs/:id' element={<Sidebar children={<JobInfo />}/>} />

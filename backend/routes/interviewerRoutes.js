@@ -20,16 +20,13 @@ const validateInterviewer = (req, res, next) => {
     if (error) {
         return next(new ExpressError(400, error.details[0].message));
     } 
-    if (!req.body.contact || !req.body.contact.phone || !req.body.contact.email) {
-        return next(new ExpressError(400, "Phone number and email are required."));
-    }
     next();
 };
 
 interviewerControl.get(
     "/home",
     wrapAsync(async (req, res) => {
-        await Interviewer.find().select(["-password", "-certificate","-contact"]).then((data) => { returnData = data });
+        await Interviewer.find().select(["-password", "-certificate"]).then((data) => { returnData = data });
         res.send(returnData);
     })
 );
@@ -50,49 +47,49 @@ interviewerControl.post(
     "/signup",
     validateInterviewer,
     wrapAsync(async (req, res) => {
-        const { username, name, password, image, info, contact, certificate, about, mastery } = req.body;
+        const { username, name, password, image, info, phone, email, certificate, about, mastery } = req.body;
 
-        if (!contact.phone || !contact.email) {
-            throw new ExpressError(400, "Phone number and email are required.");
+        let findUser = await Interviewer.findOne({ username });
+        if (findUser) {
+            throw new ExpressError(400, "Interviewer username exists, try a new one!");
+        }
+
+        let findEmail = await Interviewer.findOne({ 'email': email });
+        if (findEmail) {
+            throw new ExpressError(400, "An account is already linked to the email.");
+        }
+
+        let findPhone = await Interviewer.findOne({ 'phone': phone });
+        if (findPhone) {
+            throw new ExpressError(400, "An account is already linked to the phone number.");
         }
 
         let hashedPassword = passwordHash.generate(password);
+
         let newInterviewerData = new Interviewer({
             username,
             name,
             password: hashedPassword,
             image,
             info,
-            contact,
+            phone,
+            email,
             certificate,
             about,
             mastery
         });
-        console.log(contact);
-        let findUser = await Interviewer.findOne({ username });
-        let findEmail = await Interviewer.findOne({ 'contact.email': contact.email });
-        let findPhone = await Interviewer.findOne({ 'contact.phone': contact.phone });
-
-        if (findUser) {
-            throw new ExpressError(400, "Interviewer username exists, try a new one!");
-        }
-
-        if (findEmail) {
-            throw new ExpressError(400, "An account is already linked to the email.");
-        }
-
-        if (findPhone) {
-            throw new ExpressError(400, "An account is already linked to the phone number.");
-        }
-
+        console.log(newInterviewerData);
         await newInterviewerData.save();
+
         let token = jwt.sign(
             { username },
             process.env.JWT_PASS
         );
+
         res.send(token);
     })
 );
+
 
 interviewerControl.post(
     "/signin",
