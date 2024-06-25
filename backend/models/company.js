@@ -13,7 +13,8 @@ const companySchema = new Schema({
     },
     password: {
         type: String,
-        required: true
+        required: true,
+        select: false
     },
     website: {
         type: String,
