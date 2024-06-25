@@ -19,16 +19,16 @@ const TopHead = () => {
       position={'relative'}
       overflow={'hidden'}
     >
-      ⚠️ &nbsp; Project is currently under development &nbsp; ⚡️
+      ⚠️ &nbsp; Project is under development &nbsp; ⚡️
       <Box
         position={'absolute'}
         bottom={0}
         left={0}
         w={'100%'}
         h={'1.5px'}
-        bgGradient="linear-gradient(270deg, #000000, #2c2c2c, #4f4f4f, #7f7f7f, #b1b1b1, #d6d6d6, #ffffff)"
+        bgGradient="linear-gradient(270deg, #000000, #2c2c2c, #4f4f4f, #7f7f7f, #b1b1b1, #d6d6d6)"
         backgroundSize="400% 400%"
-        animation={`${gradientAnimation} 8s ease infinite`}
+        animation={`${gradientAnimation} 5s ease infinite`}
       />
     </Box>
   );
