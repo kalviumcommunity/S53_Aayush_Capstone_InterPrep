@@ -30,10 +30,8 @@ module.exports.interviewerValidation = Joi.object({
         working: Joi.string().required()
     }).required(),
     certificate: Joi.string().required(),
-    contact: Joi.object({
-        phone: Joi.number().integer().min(10).required(),
-        email: Joi.string().pattern(new RegExp('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$')).required()
-    }).required(),
+    phone: Joi.number().required(),
+    email: Joi.string().required(),
     about: Joi.string().required(),
     verified: Joi.boolean().default(false),
     mastery: Joi.array(),

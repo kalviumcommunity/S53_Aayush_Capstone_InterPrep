@@ -42,15 +42,15 @@ const interviewerSchema = new Schema({
         type: String,
         required: true
     },
-    contact: {
-        phone: {
-            type: Number,
-            required: true,
-        },
-        email: {
-            type: String,
-            required: true,
-        }
+    phone: {
+        type: Number,
+        required: true,
+        unique: true
+    },
+    email: {
+        type: String,
+        required: true,
+        unique: true
     },
     posts: [{
         type: Schema.Types.ObjectId,
