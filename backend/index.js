@@ -10,6 +10,7 @@ const { interviewerControl } = require("./routes/interviewerRoutes");
 const { postControl } = require("./routes/postRoutes");
 const { jobControl } = require("./routes/jobsRoutes");
 const { companyControl } = require("./routes/companyRoutes");
+const { apiControl } = require("./routes/apiRoutes");
 
 app.use(express.json());
 app.use(cors());
@@ -35,6 +36,7 @@ app.use('/interviewer', interviewerControl);
 app.use('/post', postControl);
 app.use('/jobs', jobControl)
 app.use('/company', companyControl)
+app.use('/api', apiControl);
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
