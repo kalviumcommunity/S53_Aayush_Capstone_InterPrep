@@ -2,6 +2,7 @@ import './App.css'
 import { ChakraProvider, extendTheme } from '@chakra-ui/react'
 import AllRoutes from '../src/components/routes/AllRoutes';
 import { Toaster } from 'sonner'
+import TopHead from './components/TopHead';
 
 const customTheme = extendTheme({
   breakpoints: {
@@ -20,6 +21,7 @@ function App() {
     <>
     <ChakraProvider theme={customTheme}>
       <Toaster richColors position="top-center"/>
+      <TopHead />
       <AllRoutes />
     </ChakraProvider>
     </>
