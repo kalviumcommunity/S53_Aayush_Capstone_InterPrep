@@ -31,7 +31,7 @@ function Jobs() {
   
     timeoutId = setTimeout(() => {
       fetchData();
-    }, 1000);
+    }, 500);
   
     return () => {
       if (timeoutId) {

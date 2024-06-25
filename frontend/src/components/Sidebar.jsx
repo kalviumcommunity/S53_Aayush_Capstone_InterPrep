@@ -177,6 +177,7 @@ const MobileNav = ({ onOpen, ...rest }) => {
             </MenuButton>
             <MenuList
               bg={"#FFFFFF40"}
+              backdropFilter={"blur(10px)"}
               border={"none"}
               fontFamily={"Didact Gothic"}
               color={"white"}
