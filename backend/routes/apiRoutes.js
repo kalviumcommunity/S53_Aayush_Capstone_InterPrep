@@ -15,21 +15,7 @@ apiControl.get(
     "/get/jobs/v1",
     wrapAsync(async (req, res) => {
         const jobs = await Jobs.aggregate([
-            { $sample: { size: 5 } },
-            {
-                $project: {
-                    _id: 1,
-                    role: 1,
-                    salary: 1,
-                    type: 1,
-                    timing: 1,
-                    experience: 1,
-                    place: 1,
-                    notice: 1,
-                    datePosted: 1,
-                    name: 1
-                }
-            }
+            { $sample: { size: 5 } }
         ]);
         if(!jobs){
             throw new ExpressError(404, "Jobs not Found!")
