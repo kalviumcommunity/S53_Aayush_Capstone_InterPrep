@@ -16,10 +16,6 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
-    interviews: [{
-        type: Schema.Types.ObjectId,
-        ref: "Interview"
-    }],
     image: {
         type: String,
         required: true
@@ -36,13 +32,21 @@ const userSchema = new Schema({
             unique: true
         }
     },
-    posts: [{
+    interviews: [{
         type: Schema.Types.ObjectId,
-        ref: "Posts"
+        ref: "Interview"
+    }],
+    bookmarks:  [{
+        type: Schema.Types.ObjectId,
+        ref: "Jobs"
     }],
     jobsApplied: [{
         type: Schema.Types.ObjectId,
         ref: "Jobs"
+    }],
+    posts: [{
+        type: Schema.Types.ObjectId,
+        ref: "Posts"
     }],
     dateJoined: {
         type: String,
