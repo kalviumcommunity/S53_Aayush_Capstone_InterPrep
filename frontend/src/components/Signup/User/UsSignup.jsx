@@ -56,22 +56,22 @@ function UsSignup() {
       );
 
       if (response.status === 200) {
-        toast.success("Account has been created.",{
-          description: "Redirecting to home!"
+        toast.success("Account has been created.", {
+          description: "Redirecting to home!",
         });
         setTimeout(() => {
           navigate("/");
         }, 1000);
       } else {
         console.error("Failed to register user", response);
-        toast.error("Failed to register user",{
-          description: response
+        toast.error("Failed to register user", {
+          description: response.statusText,
         });
       }
     } catch (error) {
-      console.error("Error submitting form:", error);
-      toast.error("Error submitting the form",{
-        description: error.response.data
+      console.error("An Error Occured:", error);
+      toast.error("An Error Occured:", {
+        description: error.response?.data?.details[0]?.message || error.message,
       });
     } finally {
       setIsLoadingSub(false);
