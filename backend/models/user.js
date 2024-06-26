@@ -20,23 +20,21 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
-    contact: {
-        phone: {
-            type: Number,
-            required: true,
-            unique: true
-        },
-        email: {
-            type: String,
-            required: true,
-            unique: true
-        }
+    phone: {
+        type: Number,
+        required: true,
+        unique: true
+    },
+    email: {
+        type: String,
+        required: true,
+        unique: true
     },
     interviews: [{
         type: Schema.Types.ObjectId,
         ref: "Interview"
     }],
-    bookmarks:  [{
+    bookmarks: [{
         type: Schema.Types.ObjectId,
         ref: "Jobs"
     }],

@@ -5,7 +5,8 @@ module.exports.userValidation = Joi.object({
     name: Joi.string().required(),
     image: Joi.string(),
     password: Joi.string().pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=.*[a-zA-Z]).{6,20}$/).required(),
-    contact: Joi.object(),
+    phone: Joi.number().required(),
+    email: Joi.string().required(),
     dateJoined: Joi.string()
 });
 
