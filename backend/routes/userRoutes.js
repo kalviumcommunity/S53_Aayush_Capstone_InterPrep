@@ -34,7 +34,8 @@ userControl.post(
             name:req.body.name,
             image: req.body.image,
             password: hashedPassword,
-            contact: req.body.contact
+            email: req.body.email,
+            phone: req.body.phone
         });
         let findUser = await User.find({ username: req.body.username });
         if (findUser.length == 0) {
