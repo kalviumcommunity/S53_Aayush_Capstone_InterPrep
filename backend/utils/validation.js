@@ -1,6 +1,6 @@
-const Joi = require("joi");
+import Joi from "joi";
 
-module.exports.userValidation = Joi.object({
+export const userValidation = Joi.object({
     username: Joi.string().required(),
     name: Joi.string().required(),
     image: Joi.string(),
@@ -10,7 +10,7 @@ module.exports.userValidation = Joi.object({
     dateJoined: Joi.string()
 });
 
-module.exports.userInterview = Joi.object({
+export const userInterview = Joi.object({
     user: Joi.string().required(),
     questions: Joi.array().required(),
     interviewer: Joi.object().required(),
@@ -18,7 +18,7 @@ module.exports.userInterview = Joi.object({
     dateOfInterview: Joi.string()
 })
 
-module.exports.interviewerValidation = Joi.object({
+export const interviewerValidation = Joi.object({
     username: Joi.string().min(3).max(10).required(),
     name: Joi.string().required(),
     password: Joi.string().pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=.*[a-zA-Z]).{6,20}$/).required(),
@@ -40,18 +40,18 @@ module.exports.interviewerValidation = Joi.object({
     type: Joi.string().default('Interviewer')
 });
 
-module.exports.postValidation = Joi.object({
+export const postValidation = Joi.object({
     description: Joi.string().required(),
     user: Joi.string(),
     likes: Joi.array(),
     comments: Joi.array(),
 });
 
-module.exports.commentValidation = Joi.object({
+export const commentValidation = Joi.object({
     description: Joi.string().required()
 });
 
-module.exports.companyValidation = Joi.object({
+export const companyValidation = Joi.object({
     company: Joi.string().required(),
     username: Joi.string().required(),
     image: Joi.string().required(),
@@ -62,7 +62,7 @@ module.exports.companyValidation = Joi.object({
     hiring: Joi.boolean()
 })
 
-module.exports.jobValidation = Joi.object({
+export const jobValidation = Joi.object({
     company: Joi.string(),
     role: Joi.string().required(),
     description: Joi.object(),

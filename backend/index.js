@@ -1,17 +1,17 @@
-const express = require("express");
-const cors = require('cors');
+import express from "express";
+import cors from "cors";
+import mongoose from "mongoose";
+import dotenv from "dotenv";
+import userControl from "./routes/user.routes.js";
+import interviewerControl from "./routes/interviewer.routes.js";
+import postControl from "./routes/post.routes.js";
+import jobControl from "./routes/jobs.routes.js";
+import companyControl from "./routes/company.routes.js";
+import apiControl from "./routes/api.routes.js";
+
+dotenv.config();
+
 const app = express();
-const mongoose = require('mongoose');
-
-require('dotenv').config();
-
-const { userControl } = require("./routes/userRoutes");
-const { interviewerControl } = require("./routes/interviewerRoutes");
-const { postControl } = require("./routes/postRoutes");
-const { jobControl } = require("./routes/jobsRoutes");
-const { companyControl } = require("./routes/companyRoutes");
-const { apiControl } = require("./routes/apiRoutes");
-
 app.use(express.json());
 app.use(cors());
 
