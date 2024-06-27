@@ -1,6 +1,5 @@
-const mongoose = require('mongoose');
-const { Schema } = mongoose;
-const formatDate = require('../utils/formatDate');
+import mongoose, { Schema } from 'mongoose';
+import formatDate from '../utils/formatDate.js';
 
 const companySchema = new Schema({
     company: {
@@ -50,4 +49,4 @@ const companySchema = new Schema({
 
 const Company = mongoose.model("Company", companySchema);
 
-module.exports = Company;
+export default Company;

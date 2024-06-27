@@ -13,4 +13,4 @@ function formatDate() {
     return formattedDate;
 };
 
-module.exports = formatDate;
+export default formatDate;

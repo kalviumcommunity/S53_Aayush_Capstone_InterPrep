@@ -1,6 +1,5 @@
-const mongoose = require('mongoose');
-const formatDate = require('../utils/formatDate');
-const { Schema } = mongoose;
+import mongoose, { Schema } from 'mongoose';
+import formatDate from '../utils/formatDate.js';
 
 const interviewerSchema = new Schema({
     username: {
@@ -76,4 +75,4 @@ const interviewerSchema = new Schema({
 
 const Interviewer = mongoose.model("Interviewer", interviewerSchema);
 
-module.exports = Interviewer;
+export default Interviewer;
