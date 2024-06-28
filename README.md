@@ -50,15 +50,16 @@ This project is based on MERN Stack
 ## Features Check list
 
 - [ ] Login (<- Currently Working on this)
-- [ ] Jobs Page (<- Currently Working on this)
+- [x] Jobs Page
 - [ ] Chats Feature
 - [x] File Upload
 - [ ] Apply for a Job
 - [x] Signup as an Interviewer
-- [ ] Signup as a User
+- [x] Signup as a User
+- [ ] Signup as a Company
 - [ ] Welcome E-Mail on Signup
-- [ ] Interview Booking Page
-- [ ] Book Interviews 
+- [ ] Interview Booking Page (<- Currently Working on this)
+- [ ] Book Interviews
 - [ ] Payment Gateway
 - [ ] Video Call
 
