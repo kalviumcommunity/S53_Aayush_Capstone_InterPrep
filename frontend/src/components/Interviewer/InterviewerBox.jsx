@@ -1,102 +1,153 @@
+import React from "react";
 import {
+  Box,
   Button,
-  ButtonGroup,
   Card,
   CardBody,
   CardFooter,
-  Divider,
   Flex,
-  Heading,
   Icon,
   Image,
   Stack,
   Tag,
   Text,
 } from "@chakra-ui/react";
-import React from "react";
 import { FaArrowRightLong } from "react-icons/fa6";
 
 function InterviewerBox() {
+  const tags = ["Frontend", "Backend", "DSA", "React"];
   return (
     <Card
-      maxW="xsm"
+      direction={{ base: "column", sm: "row" }}
+      variant="elevated"
       bg={"#FFFFFF15"}
-      borderRadius={"12px"}
       color={"#FFFFFF"}
-      width={{ base: "280px", md: "330px", lg: "340px"}}
+      p={{ base: "1", sm: "2" }}
+      borderRadius={"12px"}
+      width={{ lg: "75vw" }}
     >
-      <CardBody>
+      <Flex justifyContent={"center"}>
         <Image
-          w={{ base: "100%"}}
-          h={{ base: "250px", sm: "280px" }}
-          src="https://st2.depositphotos.com/1017986/6911/i/450/depositphotos_69113329-stock-photo-businessman-taking-employment-inteview.jpg"
-          alt="Interviewer"
-          borderRadius="lg"
+          w={{ base: "100%", sm: "250px", md: "300px" }}
+          h={"250px"}
+          src={
+            "https://st2.depositphotos.com/1017986/6911/i/450/depositphotos_69113329-stock-photo-businessman-taking-employment-inteview.jpg"
+          }
+          alt="Company Logo"
+          p={5}
+          borderRadius={"30px"}
         />
-        <Stack mt="6" spacing="3" >
-          <Flex gap={5} wrap={"wrap"}>
-            <Tag size={"sm"} colorScheme="whiteAlpha" bg={"#FFFFFF20"} fontFamily={"Didact Gothic"} fontWeight={"bold"}>
-              Frontend
-            </Tag>
-            <Tag size={"sm"} colorScheme="whiteAlpha" bg={"#FFFFFF20"} fontFamily={"Didact Gothic"} fontWeight={"bold"}>
-              Backend
-            </Tag>
-            <Tag size={"sm"} colorScheme="whiteAlpha" bg={"#FFFFFF20"} fontFamily={"Didact Gothic"} fontWeight={"bold"}>
-              DSA
-            </Tag>
-            <Tag size={"sm"} colorScheme="whiteAlpha" bg={"#FFFFFF20"} fontFamily={"Didact Gothic"} fontWeight={"bold"}>
-              React
-            </Tag>
+      </Flex>
+      <Stack>
+        <CardBody p={4}>
+          <Flex
+            size="md"
+            alignItems={"center"}
+            justifyContent={"space-between"}
+          >
+            <Text
+              fontFamily={"Didact Gothic"}
+              fontWeight={"bold"}
+              fontSize={{ base: "1.4rem", sm: "1.5rem" }}
+            >
+              John Doe
+            </Text>
+            <Text
+              fontFamily={"Didact Gothic"}
+              fontWeight={"bold"}
+              fontSize={{ base: "1.1rem", sm: "1.3rem" }}
+            >
+              40-45 mins
+            </Text>
           </Flex>
-          <Heading 
-          size="md"
-          fontFamily={"Didact Gothic"}
-          fontSize={{ base: "1rem", md: "1.4rem" }}
-          >John Doe</Heading>
+
+          <Flex
+            size="md"
+            alignItems={"center"}
+            justifyContent={"space-between"}
+          >
+            <Text
+              py="2"
+              fontFamily={"Didact Gothic"}
+              fontWeight={"bold"}
+              fontSize={{ base: "1rem", sm: "1.3rem" }}
+            >
+              SDE II Razorpay
+            </Text>
+            <Text
+              fontFamily={"Didact Gothic"}
+              fontWeight={"bold"}
+              fontSize={{ base: "1.1rem", sm: "1.3rem" }}
+            >
+              Front-End
+            </Text>
+          </Flex>
+          <Flex mt={1} mb={2} gap={4} wrap={"wrap"}>
+            {tags.map((tag, index) => (
+              <Tag
+                key={index}
+                size={"sm"}
+                colorScheme="whiteAlpha"
+                bg={"#FFFFFF20"}
+                fontFamily={"Didact Gothic"}
+                fontWeight={"bold"}
+              >
+                {tag}
+              </Tag>
+            ))}
+          </Flex>
+
           <Text
-          fontFamily={"Didact Gothic"}
-          fontSize={{ base: "1rem", md: "1.1rem" }}
+            fontFamily={"Didact Gothic"}
+            fontSize={{ base: "1rem", md: "1.1rem" }}
           >
             This sofa is perfect for modern tropical spaces, baroque inspired
             spaces, earthy toned spaces and for people who love a chic design
             with a sprinkle of vintage design.
           </Text>
-          <Text color={"#FFFFFF"} fontSize="2xl" fontFamily={"Didact Gothic"}>
-            <b>₹450</b> ~ 45 min Video Meet
-          </Text>
-        </Stack>
-      </CardBody>
-      <CardFooter
-      display={'flex'}
-      justifyContent={'center'}
-      >
-        <Button
-          fontSize={"16px"}
-          width={{ base: "80px", md: "140px" }}
-          height="40px"
-          color={"white"}
-          borderRadius={12}
-          bg={"#FFFFFF20"}
-          href={"#"}
-          borderBottom={"2px solid white"}
-          transition={"all 0.3s"}
-          _hover={{
-            boxShadow: "0 6px 10px 0 #ffffff60",
-          }}
-          _active={{
-            bg: "#FFFFFF10",
-          }}
-          fontFamily="Didact Gothic"
-        >
-          Book
-          <Icon
-              fontSize="1rem"
-              as={FaArrowRightLong}
-              cursor={"pointer"}
-              ml={2}
-            />
-        </Button>
-      </CardFooter>
+          <CardFooter
+            p={1}
+            mt={1}
+            flex={"row"}
+            justifyContent={"space-between"}
+            alignItems={"center"}
+          >
+            <Text
+              fontFamily={"Didact Gothic"}
+              fontWeight={"bold"}
+              fontSize={{ base: "1.1rem", sm: "1.3rem" }}
+            >
+              ₹500/Interview
+            </Text>
+            <Button
+              fontSize={"16px"}
+              width={{ base: "80px", md: "140px" }}
+              height="40px"
+              color={"white"}
+              borderRadius={12}
+              bg={"#FFFFFF20"}
+              href={"#"}
+              borderBottom={"2px solid white"}
+              transition={"all 0.3s"}
+              _hover={{
+                boxShadow: "0 6px 10px 0 #ffffff60",
+              }}
+              _active={{
+                bg: "#FFFFFF10",
+              }}
+              fontFamily="Didact Gothic"
+            >
+              Book
+              <Icon
+                fontSize="1rem"
+                as={FaArrowRightLong}
+                cursor={"pointer"}
+                ml={2}
+              />
+            </Button>
+          </CardFooter>
+        </CardBody>
+      </Stack>
     </Card>
   );
 }
