@@ -19,7 +19,7 @@ import InterviewerBox from "../components/Interviewer/InterviewerBox";
 import { Link } from "react-router-dom";
 
 function Interviewers() {
-  const [ interviewers, setInterviewers] = useState([])
+  const [interviewers, setInterviewers] = useState([]);
   useEffect(() => {
     setTimeout(() => {
       axios
@@ -81,7 +81,9 @@ function Interviewers() {
           </Breadcrumb>
         </Box>
         <Box pb={{ base: "1", md: "3" }}>
-          <Text fontSize={{ base: "1.2rem", md: "2rem" }}>All Interviewers</Text>
+          <Text fontSize={{ base: "1.2rem", md: "2rem" }}>
+            All Interviewers
+          </Text>
         </Box>
         <Box pb={{ base: "1", md: "4" }}>
           <InputGroup>
@@ -97,19 +99,23 @@ function Interviewers() {
             />
           </InputGroup>
         </Box>
-          <Flex wrap={'wrap'} gap={10} justifyContent={{base:'center', md:'flex-start'}}>
-            <InterviewerBox />
-            <InterviewerBox />
-            <InterviewerBox />
-            <InterviewerBox />
-            <InterviewerBox />
-            <InterviewerBox />
-            <InterviewerBox />
-            <InterviewerBox />
-          </Flex>
+        <Flex
+          wrap={"wrap"}
+          gap={10}
+          justifyContent={{ base: "center", md: "flex-start" }}
+        >
+          <InterviewerBox />
+          <InterviewerBox />
+          <InterviewerBox />
+          <InterviewerBox />
+          <InterviewerBox />
+          <InterviewerBox />
+          <InterviewerBox />
+          <InterviewerBox />
+        </Flex>
       </Flex>
     </HStack>
-  )
+  );
 }
 
-export default Interviewers
+export default Interviewers;
