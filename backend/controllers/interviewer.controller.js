@@ -8,12 +8,13 @@ import dotenv from "dotenv";
 dotenv.config();
 
 export const allInterviewers = wrapAsync(async (req, res) => {
-    await Interviewer.find().select(["-password", "-certificate"])
-        .then((data) => { returnData = data })
-        .catch((err) => {
-            throw new ExpressError(404, "Some Error Occured")
-        })
-    res.send(returnData);
+    try {
+        const returnData = await Interviewer.find().select("-password -certificate");
+        res.send(returnData);
+    } catch (err) {
+        console.error("Error fetching interviewers:", err);
+        throw new ExpressError(404, "Some Error Occurred");
+    }
 });
 
 export const specificInterviewers = wrapAsync(async (req, res) => {
