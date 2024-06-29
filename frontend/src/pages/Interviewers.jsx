@@ -21,16 +21,14 @@ import { Link } from "react-router-dom";
 function Interviewers() {
   const [interviewers, setInterviewers] = useState([]);
   useEffect(() => {
-    setTimeout(() => {
       axios
-        .get(`http://localhost:8080/interviewer/home`)
+        .get(`${import.meta.env.VITE_server}interviewer/home`)
         .then((response) => {
           setInterviewers(response.data);
         })
         .catch((err) => {
           console.error(err);
         });
-    }, 1000);
   }, []);
   console.log(interviewers);
   return (
