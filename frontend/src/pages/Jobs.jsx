@@ -103,7 +103,9 @@ function Jobs() {
           </Breadcrumb>
         </Box>
         <Box pb={{ base: "1", md: "3" }}>
-          <Text fontSize={{ base: "1.2rem", md: "2rem" }}>All Jobs</Text>
+          <Text fontSize={{ base: "1.2rem", md: "2rem" }}
+          fontFamily="Didact Gothic" fontWeight={900}
+          >All Jobs</Text>
         </Box>
         <Box pb={{ base: "1", md: "4" }}>
           <InputGroup>
