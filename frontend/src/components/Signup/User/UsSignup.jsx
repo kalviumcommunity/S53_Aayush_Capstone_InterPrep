@@ -38,16 +38,38 @@ function UsSignup() {
   const [imageURL, setImageURL] = useState("");
   const [isLoadingSub, setIsLoadingSub] = useState(false);
 
+  const handleUpload = async () => {
+    if (image) {
+      setIsLoading(true);
+      return uploadFile(image, "images")
+        .then((url) => {
+          setImageURL(url);
+          return url;
+        })
+        .catch((error) => {
+          console.error("Error uploading file:", error);
+          throw error;
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
+    } else {
+      return Promise.resolve("");
+    }
+  };
+
   const onSubmit = async (data) => {
     setIsLoadingSub(true);
     try {
+      const uploadedImageUrl = await handleUpload();
+
       const formData = {
         name: data.name,
         username: data.username,
         email: data.email,
         phone: data.phone,
         password: data.password,
-        image: imageURL,
+        image: uploadedImageUrl,
       };
 
       const response = await axios.post(
@@ -77,24 +99,6 @@ function UsSignup() {
       setIsLoadingSub(false);
     }
   };
-
-  const handleUpload = () => {
-    if (image) {
-      setIsLoading(true);
-      uploadFile(image, "images")
-        .then((url) => {
-          setImageURL(url);
-        })
-        .catch((error) => {
-          console.error("Error uploading file:", error);
-        })
-        .finally(() => {
-          setIsLoading(false);
-        });
-    }
-  };
-
-  console.log(isFileUploaded);
 
   return (
     <>
@@ -129,7 +133,7 @@ function UsSignup() {
           </Heading>
           <Flex>
             <FormControl mr="5%" isRequired>
-              <FormLabel htmlFor="name" fontWeight="normal" color="white">
+              <FormLabel htmlFor="name" fontWeight="bold" color="white">
                 Name
               </FormLabel>
               <Input
@@ -142,7 +146,7 @@ function UsSignup() {
             </FormControl>
 
             <FormControl isRequired>
-              <FormLabel htmlFor="username" fontWeight="normal" color="white">
+              <FormLabel htmlFor="username" fontWeight="bold" color="white">
                 Username
               </FormLabel>
               <Input
@@ -164,7 +168,7 @@ function UsSignup() {
             </FormControl>
           </Flex>
           <FormControl mt="2%" isRequired>
-            <FormLabel htmlFor="email" fontWeight="normal" color="white">
+            <FormLabel htmlFor="email" fontWeight="bold" color="white">
               Email address
             </FormLabel>
             <Input
@@ -187,7 +191,7 @@ function UsSignup() {
           </FormControl>
 
           <FormControl mt="2%" isRequired>
-            <FormLabel htmlFor="phone" fontWeight="normal" color="white">
+            <FormLabel htmlFor="phone" fontWeight="bold" color="white">
               Contact No.
             </FormLabel>
             <Input
@@ -209,7 +213,7 @@ function UsSignup() {
           <FormControl id="password" isRequired>
             <FormLabel
               htmlFor="password"
-              fontWeight="normal"
+              fontWeight="bold"
               mt="2%"
               color="white"
             >
@@ -265,7 +269,7 @@ function UsSignup() {
           </FormControl>
 
           <FormControl mt="3%" isRequired>
-            <FormLabel htmlFor="image" fontWeight="normal" color="white">
+            <FormLabel htmlFor="image" fontWeight="bold" color="white">
               Profile Image
             </FormLabel>
             <label className="custom-upload">
@@ -275,24 +279,19 @@ function UsSignup() {
                 id="image"
                 type="file"
                 accept="image/*"
+                {...register("image", {
+                  required: "Image is required"
+                })}
                 onChange={(e) => {
                   setImage(e.target.files[0]);
                 }}
                 disabled={isFileUploaded}
+                
               />
             </label>
             <p className="err">{errors.image && errors.image.message}</p>
-            {isFileUploaded ? (
+            {isFileUploaded && (
               <p style={{ color: "green" }}>File uploaded successfully!</p>
-            ) : (
-              <Button
-                onClick={handleUpload}
-                isLoading={isLoading}
-                loadingText="Uploading ..."
-                disabled={!image || isLoading}
-              >
-                Upload Image
-              </Button>
             )}
           </FormControl>
 
@@ -302,14 +301,13 @@ function UsSignup() {
             variant="solid"
             onClick={handleSubmit(onSubmit)}
             isLoading={isLoadingSub}
-            loadingText="Submitting ..."
-          >
-            Submit
+            loadingText="Submitting …"
+            >
+              Submit
           </Button>
-        </Box>
-      </div>
-    </>
-  );
-}
+          </Box>
+          </div>
+        </>
+)};
 
 export default UsSignup;
