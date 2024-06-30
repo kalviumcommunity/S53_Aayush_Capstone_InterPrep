@@ -27,20 +27,16 @@ const useFileUpload = () => {
         (snapshot) => {
           const progress =
             (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          console.log("Upload is " + progress + "% done");
         },
         (error) => {
           switch (error.code) {
             case "storage/unauthorized":
-              console.log("You are not authorized to upload!");
               reject(error);
               break;
             case "storage/canceled":
-              console.log("You have cancelled the upload!");
               reject(error);
               break;
             case "storage/unknown":
-              console.log("Unknown error occurred!");
               reject(error);
               break;
           }
@@ -48,7 +44,6 @@ const useFileUpload = () => {
         () => {
           getDownloadURL(uploadTask.snapshot.ref)
             .then((downloadURL) => {
-              console.log("File uploaded successfully:", downloadURL);
               setCVURL(downloadURL);
               setIsFileUploaded(true);
               resolve(downloadURL);

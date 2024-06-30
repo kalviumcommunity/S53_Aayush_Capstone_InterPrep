@@ -1,11 +1,5 @@
 import React, { useState } from "react";
-import {
-  Progress,
-  Box,
-  ButtonGroup,
-  Button,
-  Flex,
-} from "@chakra-ui/react";
+import { Progress, Box, ButtonGroup, Button, Flex } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -23,8 +17,13 @@ export default function InterviewSignup() {
   const [both, setBoth] = useState(false);
   const navigate = useNavigate();
 
-  const { uploadFile, isLoading, setIsLoading, isFileUploaded, setIsFileUploaded } =
-    useFileUpload();
+  const {
+    uploadFile,
+    isLoading,
+    setIsLoading,
+    isFileUploaded,
+    setIsFileUploaded,
+  } = useFileUpload();
 
   const {
     handleSubmit,
@@ -40,13 +39,13 @@ export default function InterviewSignup() {
     }
     return null;
   };
-  
+
   const onSubmit = async (data) => {
     setBoth(true);
-  
+
     const masteryArray = data.mastery.split(",").map((skill) => skill.trim());
     data.phone = parseInt(data.phone, 10);
-  
+
     const updatedSendData = {
       username: data.username,
       name: data.name,
@@ -59,48 +58,42 @@ export default function InterviewSignup() {
         qualification: data.qualification,
         experience: data.experience,
         working: data.working,
-      }
+      },
     };
-  
+
     const uploadAndSubmit = async () => {
-      // Handle file uploads
       const cvLink = await handleUpload(cv, "cv");
       const imageLink = await handleUpload(image, "images");
-  
+
       if (!cvLink || !imageLink) {
         throw new Error("File upload failed");
       }
-  
+
       updatedSendData.certificate = cvLink;
       updatedSendData.image = imageLink;
-  
-      // Submit the form data
+
       const response = await axios.post(
         `${import.meta.env.VITE_server}interviewer/signup`,
         updatedSendData
       );
-  
-      return response.data; // Return the response data
-    };
-  
-    // Use toast.promise and handle finally logic separately
-    toast.promise(
-      uploadAndSubmit(),
-      {
-        loading: 'Submitting your data... do not reload',
-        success: () => {
-          setBoth(false);
-      setTimeout(() => {
-        navigate("/");
-      }, 1000);
-          return 'Account has been created. Redirecting to home!'
-        },
-        error: (error) => {
-          setBoth(false);
-          return `Submission failed: ${error.response?.data || error.message}`},
-      }
-    );
 
+      return response.data;
+    };
+
+    toast.promise(uploadAndSubmit(), {
+      loading: "Submitting your data... do not reload",
+      success: () => {
+        setBoth(false);
+        setTimeout(() => {
+          navigate("/");
+        }, 1000);
+        return "Account has been created. Redirecting to home!";
+      },
+      error: (error) => {
+        setBoth(false);
+        return `Submission failed: ${error.response?.data || error.message}`;
+      },
+    });
   };
 
   const onNext = async () => {
