@@ -17,10 +17,10 @@ import { MdOutlineWork, MdAccessTime } from "react-icons/md";
 import { IoLocationOutline } from "react-icons/io5";
 import { TbFileCertificate, TbCalendarTime } from "react-icons/tb";
 import { FaArrowRightLong } from "react-icons/fa6";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 function JobBox({ data }) {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const JobInfo = [
     { name: `${data.salary}`, icon: AiOutlineDollar, flex: "" },
     {
@@ -35,29 +35,28 @@ function JobBox({ data }) {
     { name: `${data.timing}`, icon: MdAccessTime, flex: "" },
   ];
   const handleArrow = () => {
-    navigate(`/jobs/${data._id}`)
-  }
+    navigate(`/jobs/${data._id}`);
+  };
 
   return (
     <Card
-      direction={{ base: "column", sm: "row" }}
+      direction={{ base: "column", lg: "row" }}
       variant="elevated"
       bg={"#FFFFFF15"}
       color={"#FFFFFF"}
       p={{ base: "1", sm: "2" }}
       borderRadius={"12px"}
-      width={{'lg':'75vw'}}
+      width={{ lg: "70vw" }}
     >
-      <Flex
-      justifyContent={"center"}
-      >
+      <Flex justifyContent={"center"}>
         <Image
           w={{ base: "100%", sm: "250px" }}
           h={"100%"}
           src={data.company.image}
           alt="Company Logo"
           p={5}
-          borderRadius={'30px'}
+          display={{ base: "block", sm: "none", lg: "block" }}
+          borderRadius={"30px"}
         />
       </Flex>
       <Stack>
@@ -65,7 +64,7 @@ function JobBox({ data }) {
           <Heading
             size="md"
             fontFamily={"Didact Gothic"}
-            fontSize={{ base: "1rem", md: "1.4rem" }}
+            fontSize={{ base: "1.2rem", md: "1.4rem" }}
           >
             {data.role}
           </Heading>
@@ -101,7 +100,9 @@ function JobBox({ data }) {
                   fontFamily={"Didact Gothic"}
                   fontSize={{ base: "0.9rem", md: "1rem" }}
                 >
-                  {data.name}
+                  {data.name.length > 20
+                    ? data.name.substr(0, 20) + "..."
+                    : data.name}
                 </Text>
               </GridItem>
             ))}
@@ -112,9 +113,7 @@ function JobBox({ data }) {
               alignItems={"center"}
             ></GridItem>
           </Grid>
-          <CardFooter
-            p={1}
-          >
+          <CardFooter p={1}>
             <Icon
               fontSize="1.8rem"
               as={FaArrowRightLong}

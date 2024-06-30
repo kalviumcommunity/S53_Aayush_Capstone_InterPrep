@@ -14,8 +14,8 @@ import {
 } from "@chakra-ui/react";
 import { FaArrowRightLong } from "react-icons/fa6";
 
-function InterviewerBox() {
-  const tags = ["Frontend", "Backend", "DSA", "React"];
+function InterviewerBox({ data }) {
+  const tags = data.mastery;
   return (
     <Card
       direction={{ base: "column", sm: "row" }}
@@ -29,17 +29,18 @@ function InterviewerBox() {
       <Flex justifyContent={"center"}>
         <Image
           w={{ base: "100%", sm: "250px", md: "300px" }}
+          display={{ base: "block", sm: "none", xl: "block" }}
           h={"250px"}
           src={
-            "https://st2.depositphotos.com/1017986/6911/i/450/depositphotos_69113329-stock-photo-businessman-taking-employment-inteview.jpg"
+            data.image
           }
-          alt="Company Logo"
+          alt="Interviwer Picture"
           p={5}
           borderRadius={"30px"}
         />
       </Flex>
-      <Stack>
-        <CardBody p={4}>
+      <Stack w={'100%'}>
+        <CardBody p={4} display={'flex'} flexDirection={'column'}  justifyContent={'space-around'}>
           <Flex
             size="md"
             alignItems={"center"}
@@ -50,7 +51,7 @@ function InterviewerBox() {
               fontWeight={"bold"}
               fontSize={{ base: "1.4rem", sm: "1.5rem" }}
             >
-              John Doe
+              {data.name}
             </Text>
             <Text
               fontFamily={"Didact Gothic"}
@@ -72,7 +73,7 @@ function InterviewerBox() {
               fontWeight={"bold"}
               fontSize={{ base: "1rem", sm: "1.3rem" }}
             >
-              SDE II Razorpay
+              {data.info.working}
             </Text>
             <Text
               fontFamily={"Didact Gothic"}
@@ -101,9 +102,7 @@ function InterviewerBox() {
             fontFamily={"Didact Gothic"}
             fontSize={{ base: "1rem", md: "1.1rem" }}
           >
-            This sofa is perfect for modern tropical spaces, baroque inspired
-            spaces, earthy toned spaces and for people who love a chic design
-            with a sprinkle of vintage design.
+            {data.about}
           </Text>
           <CardFooter
             p={1}

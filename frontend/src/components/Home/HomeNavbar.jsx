@@ -286,7 +286,7 @@ const NAV_ITEMS = [
       {
         label: "Freelance Projects",
         subLabel: "An exclusive list for contract work",
-        href: "jobs",
+        href: "gigs",
       },
     ],
   },

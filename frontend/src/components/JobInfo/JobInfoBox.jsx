@@ -33,7 +33,7 @@ function JobInfoBox({ data }) {
   ];
   return (
     <Card
-      direction={{ base: "column", sm: "row" }}
+      direction={{ base: "column", md: "row" }}
       variant="elevated"
       bg={"#FFFFFF15"}
       color={"#FFFFFF"}
@@ -51,6 +51,7 @@ function JobInfoBox({ data }) {
           alt="Company Logo"
           p={5}
           borderRadius={'30px'}
+          display={{ base: "block", sm: "none", lg: "block" }}
         />
       </Flex>
       <Stack>

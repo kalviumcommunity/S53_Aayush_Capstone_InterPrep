@@ -16,6 +16,7 @@ import {
 import axios from "axios";
 import { CircleLoader } from "react-spinners";
 import InterviewerBox from "../components/Interviewer/InterviewerBox";
+import InterviewerHead from "../components/Interviewer/InterviewerHead"
 import { Link } from "react-router-dom";
 
 function Interviewers() {
@@ -43,74 +44,30 @@ function Interviewers() {
         p={{ base: "3", md: "8" }}
         color={"white"}
       >
-        <Box pb={{ base: "1", md: "3" }}>
-          <Breadcrumb separator={<ChevronRightIcon color="gray.300" />}>
-            <BreadcrumbItem>
-              <BreadcrumbLink
-                fontFamily="Didact Gothic"
-                fontSize={{ base: "0.9rem", md: "1.1rem" }}
-                as={Link}
-                to="/"
-              >
-                Home
-              </BreadcrumbLink>
-            </BreadcrumbItem>
-
-            <BreadcrumbItem>
-              <BreadcrumbLink
-                fontFamily="Didact Gothic"
-                fontSize={{ base: "0.9rem", md: "1.1rem" }}
-                as={Link}
-                to="/browse"
-              >
-                Browse
-              </BreadcrumbLink>
-            </BreadcrumbItem>
-
-            <BreadcrumbItem isCurrentPage>
-              <BreadcrumbLink
-                fontFamily="Didact Gothic"
-                fontSize={{ base: "0.95rem", md: "1.15rem" }}
-                fontWeight={900}
-              >
-                Interviewers
-              </BreadcrumbLink>
-            </BreadcrumbItem>
-          </Breadcrumb>
-        </Box>
-        <Box pb={{ base: "1", md: "3" }}>
-          <Text fontSize={{ base: "1.2rem", md: "2rem" }}>
-            All Interviewers
-          </Text>
-        </Box>
-        <Box pb={{ base: "1", md: "4" }}>
-          <InputGroup>
-            <InputLeftElement pointerEvents="none">
-              <Search2Icon color="gray.300" />
-            </InputLeftElement>
-            <Input
-              type="text"
-              fontFamily="Didact Gothic"
-              placeholder="Search for Interviewer"
-              borderRadius="10px"
-              w={{ base: "18rem", md: "28rem" }}
-            />
-          </InputGroup>
-        </Box>
-        <Flex
-          wrap={"wrap"}
+        <InterviewerHead />
+        <Box
+          pb={{ base: "1", md: "4" }}
+          display="flex"
+          flexDirection="column"
           gap={10}
-          justifyContent={{ base: "center", md: "flex-start" }}
         >
-          <InterviewerBox />
-          <InterviewerBox />
-          <InterviewerBox />
-          <InterviewerBox />
-          <InterviewerBox />
-          <InterviewerBox />
-          <InterviewerBox />
-          <InterviewerBox />
-        </Flex>
+          {interviewers.length === 0 ? (
+            <Flex
+            position="absolute"
+            top="50%"
+            left="50%"
+            transform="translate(-50%, -50%)"
+            alignItems="center"
+            justifyContent="center"
+          >
+            <CircleLoader color="white" />
+          </Flex>
+          ) : (
+            interviewers.map((e, i) => {
+              return <InterviewerBox data={e} key={i} />;
+            })
+          )}
+        </Box>
       </Flex>
     </HStack>
   );
