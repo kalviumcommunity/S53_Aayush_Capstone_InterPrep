@@ -10,7 +10,6 @@ import { MdCloudUpload } from "react-icons/md";
 
 const Form3 = ({ register, errors, setImage, image }) => {
   const handleFileChange = (e) => {
-    console.log("Selected file:", e.target.files[0]);
     setImage(e.target.files[0]);
   };
 

@@ -154,8 +154,8 @@ const Form1 = ({ register, errors }) => {
               pattern: {
                 value:
                   /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=.*[a-zA-Z]).{6,20}$/,
-               message: "Password Invalid!",
-            },
+                message: "Password Invalid!",
+              },
             })}
             color="white"
           />
