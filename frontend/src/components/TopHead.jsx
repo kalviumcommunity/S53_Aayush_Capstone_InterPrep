@@ -28,7 +28,7 @@ const TopHead = () => {
         h={'1.5px'}
         bgGradient="linear-gradient(270deg, #000000, #2c2c2c, #4f4f4f, #7f7f7f, #b1b1b1, #d6d6d6)"
         backgroundSize="400% 400%"
-        animation={`${gradientAnimation} 5s ease infinite`}
+        animation={`${gradientAnimation} 4s ease infinite`}
       />
     </Box>
   );
