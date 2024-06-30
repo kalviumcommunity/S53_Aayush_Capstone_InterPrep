@@ -12,33 +12,19 @@ import { useNavigate } from "react-router-dom";
 import Form1 from "./Form1";
 import Form2 from "./Form2";
 import Form3 from "./Form3";
-import {toast} from "sonner";
+import { toast } from "sonner";
+import useFileUpload from "../../../hooks/useFileUpload";
 
 export default function InterviewSignup() {
   const [step, setStep] = useState(0);
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const [cvURL, setCVURL] = useState("");
-  const [selectedFile, setSelectedFile] = useState(null);
-  const [cv, setCV] = useState();
-  const [isFileUploaded, setIsFileUploaded] = useState(false);
+  const [cv, setCV] = useState(null);
   const [image, setImage] = useState(null);
-  const [imageURL, setImageURL] = useState("");
   const [isImageUploaded, setIsImageUploaded] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [both, setBoth] = useState(false);
   const navigate = useNavigate();
 
-  const [sendData, setsendData] = useState({
-    username: "",
-    name: "",
-    password: "",
-    image: "",
-    info: { qualification: "", experience: "", working: "" },
-    phone: "",
-    email: "",
-    certificate: "",
-    about: "",
-    mastery: "",
-  });
+  const { uploadFile, isLoading, setIsLoading, isFileUploaded, setIsFileUploaded } =
+    useFileUpload();
 
   const {
     handleSubmit,
@@ -47,54 +33,74 @@ export default function InterviewSignup() {
     trigger,
   } = useForm();
 
+  const handleUpload = async (upload, type) => {
+    if (upload) {
+      const url = await uploadFile(upload, type);
+      return url;
+    }
+    return null;
+  };
+  
   const onSubmit = async (data) => {
-    setIsLoading(true);
-    try {
-      const masteryArray = data.mastery.split(",").map((skill) => skill.trim());
-
-      data.phone = parseInt(data.phone, 10);
-      const updatedSendData = {
-        username: data.username,
-        name: data.name,
-        password: data.password,
-        image: imageURL,
-        info: {
-          qualification: data.qualification,
-          experience: data.experience,
-          working: data.working,
-        },
-        phone: data.phone,
-        email: data.email,
-        certificate: cvURL,
-        about: data.about,
-        mastery: masteryArray,
-      };
-
-      setsendData(updatedSendData);
-
+    setBoth(true);
+  
+    const masteryArray = data.mastery.split(",").map((skill) => skill.trim());
+    data.phone = parseInt(data.phone, 10);
+  
+    const updatedSendData = {
+      username: data.username,
+      name: data.name,
+      password: data.password,
+      phone: data.phone,
+      email: data.email,
+      about: data.about,
+      mastery: masteryArray,
+      info: {
+        qualification: data.qualification,
+        experience: data.experience,
+        working: data.working,
+      }
+    };
+  
+    const uploadAndSubmit = async () => {
+      // Handle file uploads
+      const cvLink = await handleUpload(cv, "cv");
+      const imageLink = await handleUpload(image, "images");
+  
+      if (!cvLink || !imageLink) {
+        throw new Error("File upload failed");
+      }
+  
+      updatedSendData.certificate = cvLink;
+      updatedSendData.image = imageLink;
+  
+      // Submit the form data
       const response = await axios.post(
         `${import.meta.env.VITE_server}interviewer/signup`,
         updatedSendData
       );
-
-      if (response.data) {
-        setIsSubmitted(true);
-        toast.success("Account has been created.",{
-          description: "Redirecting to home!"
-        });
-      }
-
+  
+      return response.data; // Return the response data
+    };
+  
+    // Use toast.promise and handle finally logic separately
+    toast.promise(
+      uploadAndSubmit(),
+      {
+        loading: 'Submitting your data... do not reload',
+        success: () => {
+          setBoth(false);
       setTimeout(() => {
         navigate("/");
       }, 1000);
-    } catch (error) {
-      console.error("Submission failed:", error);
-      toast.error("Submission Failed.",{
-        description: error.response.data
-      });
-    } finally {
-      setIsLoading(false);
-    }
+          return 'Account has been created. Redirecting to home!'
+        },
+        error: (error) => {
+          setBoth(false);
+          return `Submission failed: ${error.response?.data || error.message}`},
+      }
+    );
+
   };
 
   const onNext = async () => {
@@ -116,14 +122,13 @@ export default function InterviewSignup() {
     }
   };
 
-  const handleCVURLChange = (url) => {
-    setCVURL(url);
-    setSelectedFile(url);
+  const handleCVChange = (file) => {
+    setCV(file);
     setIsFileUploaded(true);
   };
 
-  const handleImageURLChange = (url) => {
-    setImageURL(url);
+  const handleImageChange = (file) => {
+    setImage(file);
     setIsImageUploaded(true);
   };
 
@@ -153,24 +158,16 @@ export default function InterviewSignup() {
               register={register}
               errors={errors}
               cv={cv}
-              setCV={setCV}
-              isFileUploaded={isFileUploaded}
-              setIsFileUploaded={setIsFileUploaded}
-              isLoading={isLoading}
-              setIsLoading={setIsLoading}
-              setCVURL={handleCVURLChange}
-              selectedFile={selectedFile}
+              setCV={handleCVChange}
             />
           ) : (
             <Form3
               register={register}
               errors={errors}
               image={image}
-              setImage={setImage}
+              setImage={handleImageChange}
               isFileUploaded={isImageUploaded}
-              isLoading={isLoading}
               setIsLoading={setIsLoading}
-              setImageURL={handleImageURLChange}
             />
           )}
         </div>
@@ -204,7 +201,7 @@ export default function InterviewSignup() {
                   colorScheme="teal"
                   variant="outline"
                   w="7rem"
-                  disabled={isFileUploaded}
+                  disabled={!isFileUploaded}
                 >
                   Next
                 </Button>
@@ -227,7 +224,7 @@ export default function InterviewSignup() {
                 type="submit"
                 colorScheme="red"
                 variant="solid"
-                isLoading={isLoading}
+                isLoading={both}
               >
                 Submit
               </Button>
