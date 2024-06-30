@@ -1,26 +1,17 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Heading,
   FormControl,
   FormLabel,
   Textarea,
   SimpleGrid,
-  Button,
 } from "@chakra-ui/react";
 import { MdCloudUpload } from "react-icons/md";
-import useFileUpload from "../../../hooks/useFileUpload";
 
-const Form3 = ({ register, errors, setImage, setImageURL, image }) => {
-  const { uploadFile, isLoading, setIsLoading, isFileUploaded } =
-    useFileUpload();
-
-  const handleUpload = () => {
-    if (image) {
-      setIsLoading(true);
-      uploadFile(image, "images").then((url) => {
-        setImageURL(url);
-      });
-    }
+const Form3 = ({ register, errors, setImage, image }) => {
+  const handleFileChange = (e) => {
+    console.log("Selected file:", e.target.files[0]);
+    setImage(e.target.files[0]);
   };
 
   return (
@@ -52,27 +43,10 @@ const Form3 = ({ register, errors, setImage, setImageURL, image }) => {
               id="image"
               type="file"
               accept="image/*"
-              onChange={(e) => {
-                setImage(e.target.files[0]);
-              }}
-              disabled={isFileUploaded}
+              onChange={handleFileChange}
             />
           </label>
-          {isFileUploaded ? (
-            <p style={{ color: "green" }}>File uploaded successfully!</p>
-          ) : (
-            <Button
-              onClick={handleUpload}
-              isLoading={isLoading}
-              loadingText="Uploading ..."
-              disabled={isFileUploaded}
-            >
-              Upload Image
-            </Button>
-          )}
-          {!isFileUploaded && (
-            <p className="err">{errors.image && errors.image.message}</p>
-          )}
+          <p className="err">{errors.image && errors.image.message}</p>
         </FormControl>
       </SimpleGrid>
     </>
