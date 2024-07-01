@@ -8,14 +8,14 @@ const Form2 = ({ register, errors, setCV, cv }) => {
       <Heading
         w="100%"
         textAlign="center"
-        fontWeight="normal"
+        fontWeight="bold"
         mb="2%"
         color="white"
       >
         Interviewer Details
       </Heading>
       <FormControl mt="2%" isRequired>
-        <FormLabel htmlFor="qualification" fontWeight="normal" color="white">
+        <FormLabel htmlFor="qualification" fontWeight="bold" color="white">
           Qualification
         </FormLabel>
         <Input
@@ -33,7 +33,7 @@ const Form2 = ({ register, errors, setCV, cv }) => {
       </FormControl>
       <Flex mt="3%">
         <FormControl mr="5%" isRequired>
-          <FormLabel htmlFor="experience" fontWeight="normal" color="white">
+          <FormLabel htmlFor="experience" fontWeight="bold" color="white">
             Experience
           </FormLabel>
           <Input
@@ -48,7 +48,7 @@ const Form2 = ({ register, errors, setCV, cv }) => {
         </FormControl>
 
         <FormControl isRequired>
-          <FormLabel htmlFor="working" fontWeight="normal" color="white">
+          <FormLabel htmlFor="working" fontWeight="bold" color="white">
             Currently Working at
           </FormLabel>
           <Input
@@ -62,7 +62,7 @@ const Form2 = ({ register, errors, setCV, cv }) => {
       </Flex>
 
       <FormControl mt="2%" isRequired>
-        <FormLabel htmlFor="mastery" fontWeight="normal" color="white">
+        <FormLabel htmlFor="mastery" fontWeight="bold" color="white">
           Mastery
         </FormLabel>
         <Input
@@ -78,7 +78,7 @@ const Form2 = ({ register, errors, setCV, cv }) => {
       </FormControl>
 
       <FormControl isRequired>
-        <FormLabel htmlFor="cv" fontWeight="normal" color="white">
+        <FormLabel htmlFor="cv" fontWeight="bold" color="white">
           Upload your CV
         </FormLabel>
         <label className="custom-upload">
