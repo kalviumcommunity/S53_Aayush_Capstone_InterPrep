@@ -15,12 +15,12 @@ const Form3 = ({ register, errors, setImage, image }) => {
 
   return (
     <>
-      <Heading w="100%" textAlign="center" fontWeight="normal" color="white">
+      <Heading w="100%" textAlign="center" fontWeight="bold" color="white">
         Interviewer
       </Heading>
       <SimpleGrid columns={1} spacing={6}>
         <FormControl isRequired mt="3%">
-          <FormLabel htmlFor="about" fontWeight="normal" color="white">
+          <FormLabel htmlFor="about" fontWeight="bold" color="white">
             Can you tell a little about yourself?
           </FormLabel>
           <Textarea
@@ -32,7 +32,7 @@ const Form3 = ({ register, errors, setImage, image }) => {
           <p className="err">{errors.about && errors.about.message}</p>
         </FormControl>
         <FormControl mt="3%" isRequired>
-          <FormLabel htmlFor="image" fontWeight="normal" color="white">
+          <FormLabel htmlFor="image" fontWeight="bold" color="white">
             Please Upload your Profile Image
           </FormLabel>
           <label className="custom-upload">

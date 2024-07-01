@@ -43,7 +43,7 @@ const Form1 = ({ register, errors }) => {
       </Heading>
       <Flex>
         <FormControl mr="5%" isRequired>
-          <FormLabel htmlFor="name" fontWeight="normal" color="white">
+          <FormLabel htmlFor="name" fontWeight="bold" color="white">
             Name
           </FormLabel>
           <Input
@@ -56,7 +56,7 @@ const Form1 = ({ register, errors }) => {
         </FormControl>
 
         <FormControl isRequired>
-          <FormLabel htmlFor="username" fontWeight="normal" color="white">
+          <FormLabel htmlFor="username" fontWeight="bold" color="white">
             Username
           </FormLabel>
           <Input
@@ -73,7 +73,7 @@ const Form1 = ({ register, errors }) => {
         </FormControl>
       </Flex>
       <FormControl mt="2%" isRequired>
-        <FormLabel htmlFor="email" fontWeight="normal" color="white">
+        <FormLabel htmlFor="email" fontWeight="bold" color="white">
           Email address
         </FormLabel>
         <Input
@@ -96,7 +96,7 @@ const Form1 = ({ register, errors }) => {
       </FormControl>
 
       <FormControl mt="2%" isRequired>
-        <FormLabel htmlFor="phone" fontWeight="normal" color="white">
+        <FormLabel htmlFor="phone" fontWeight="bold" color="white">
           Contact No.
         </FormLabel>
         <Input
@@ -116,7 +116,7 @@ const Form1 = ({ register, errors }) => {
       </FormControl>
 
       <FormControl id="password" isRequired>
-        <FormLabel htmlFor="password" fontWeight="normal" mt="2%" color="white">
+        <FormLabel htmlFor="password" fontWeight="bold" mt="2%" color="white">
           Password &nbsp;
           <Tooltip
             hasArrow
