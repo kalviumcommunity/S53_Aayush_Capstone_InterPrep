@@ -62,7 +62,9 @@ export default function HomeNavbar() {
           justify={{ base: "center", md: "start" }}
           alignItems="center"
         >
+          <Box mt={2} ml={-4}>
           <img src={Logo} id="logo-img" draggable="false" />
+          </Box>
           <Flex display={{ base: "none", md: "flex" }} ml={10}>
             <DesktopNav />
           </Flex>
