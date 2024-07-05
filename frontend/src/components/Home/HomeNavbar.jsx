@@ -63,7 +63,9 @@ export default function HomeNavbar() {
           alignItems="center"
         >
           <Box mt={2} ml={-4}>
-          <img src={Logo} id="logo-img" draggable="false" />
+            <Link to={'/'}>
+              <img src={Logo} id="logo-img" draggable="false" />
+            </Link>
           </Box>
           <Flex display={{ base: "none", md: "flex" }} ml={10}>
             <DesktopNav />
@@ -84,7 +86,7 @@ export default function HomeNavbar() {
             height="40px"
             color={"white"}
             bg={"black"}
-            to={'/'}
+            to={"/start"}
             borderRadius="38"
             borderBottom={"2px solid #00E0FF"}
             _hover={{
@@ -124,7 +126,7 @@ const DesktopNav = () => {
                 fontWeight={"bold"}
                 color={linkColor}
                 fontFamily={"Didact Gothic"}
-          transition={"all .3s ease"}
+                transition={"all .3s ease"}
                 _hover={{
                   textDecoration: "none",
                   color: linkHoverColor,
@@ -139,12 +141,11 @@ const DesktopNav = () => {
               <PopoverContent
                 border={0}
                 boxShadow={"xl"}
-                backdropFilter= "blur(8px)"
+                backdropFilter="blur(8px)"
                 bg={popoverContentBgColor}
                 p={4}
                 rounded={"xl"}
                 minW={"sm"}
-
               >
                 <Stack>
                   {navItem.children.map((child) => (
@@ -159,7 +160,6 @@ const DesktopNav = () => {
     </Stack>
   );
 };
-
 
 const DesktopSubNav = ({ label, href, subLabel }) => {
   return (
@@ -184,7 +184,11 @@ const DesktopSubNav = ({ label, href, subLabel }) => {
           >
             {label}
           </Text>
-          <Text fontSize={"0.9rem"} color={"#ffffff"}fontFamily="Didact Gothic">
+          <Text
+            fontSize={"0.9rem"}
+            color={"#ffffff"}
+            fontFamily="Didact Gothic"
+          >
             {subLabel}
           </Text>
         </Box>
@@ -203,7 +207,6 @@ const DesktopSubNav = ({ label, href, subLabel }) => {
     </Link>
   );
 };
-
 
 const MobileNav = () => {
   return (
@@ -248,10 +251,27 @@ const MobileNavItem = ({ label, children, href }) => {
       </Flex>
 
       <Collapse in={isOpen} animateOpacity style={{ marginTop: "0!important" }}>
-        <Stack pl={4} fontFamily="Didact Gothic" fontWeight="bold" borderLeft={1} mb={4} borderStyle={"solid"} borderColor={"#FFFFFF90"} color={"#FFFFFF"} align={"start"}>
+        <Stack
+          pl={4}
+          fontFamily="Didact Gothic"
+          fontWeight="bold"
+          borderLeft={1}
+          mb={4}
+          borderStyle={"solid"}
+          borderColor={"#FFFFFF90"}
+          color={"#FFFFFF"}
+          align={"start"}
+        >
           {children &&
             children.map((child) => (
-              <ChakraLink key={child.label} py={2} as={Link} to={child.href} fontFamily="Didact Gothic" fontWeight="bold">
+              <ChakraLink
+                key={child.label}
+                py={2}
+                as={Link}
+                to={`/${child.href}`}
+                fontFamily="Didact Gothic"
+                fontWeight="bold"
+              >
                 {child.label}
               </ChakraLink>
             ))}
