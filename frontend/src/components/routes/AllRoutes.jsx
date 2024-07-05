@@ -9,6 +9,7 @@ import Jobs from '../../pages/Jobs'
 import Interviewers from '../../pages/Interviewers'
 import UserSignup from '../../pages/UserSignup'
 import Freelance from '../../pages/Freelance'
+import GetStarted from '../../pages/GetStarted'
 
 function AllRoutes() {
   return (
@@ -18,6 +19,7 @@ function AllRoutes() {
         <Route path='/interviewer/signup' element={<IntSignUp />}/>
         <Route path='/user/signup' element={<UserSignup />}/>
         <Route path='/browse' element={<Mainpage />}/>
+        <Route path='/start' element={<GetStarted />}/>
         <Route path='/jobs' element={<Sidebar children={<Jobs />}/>}/>
         <Route path='/jobs/:id' element={<Sidebar children={<JobInfo />}/>} />
         <Route path='/interviewers' element={<Sidebar children={<Interviewers />} />}/>
