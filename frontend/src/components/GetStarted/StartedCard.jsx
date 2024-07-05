@@ -10,10 +10,9 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { FaArrowRightLong } from "react-icons/fa6";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function StartedCard({ data }) {
-  const navigate = useNavigate();
   return (
     <Link to={data.to}>
       <Card
