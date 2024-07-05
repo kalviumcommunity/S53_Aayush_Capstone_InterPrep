@@ -1,9 +1,8 @@
 import React from "react";
 import HomeNavbar from "../components/Home/HomeNavbar";
 import StartedHead from "../components/GetStarted/StartedHead";
-import StartedCard from "../components/GetStarted/StartedCard";
 import { Flex, Text } from "@chakra-ui/react";
-import StartedCards from "../components/GetStarted/StartedCards";
+import CompiledCards from "../components/GetStarted/CompiledCards";
 import { Link } from "react-router-dom";
 
 function GetStarted() {
@@ -18,7 +17,7 @@ function GetStarted() {
       color={"white"}
       flexDirection={"column"}
     >
-      <StartedCards />
+      <CompiledCards />
       <Text
         fontSize={{ base: "1.1rem", md: "1.2rem" }}
         fontFamily="Didact Gothic"
