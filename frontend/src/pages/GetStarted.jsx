@@ -11,23 +11,26 @@ function GetStarted() {
       <HomeNavbar />
       <StartedHead />
       <Flex
-      m={10}
-      alignItems={"center"}
-      gap={"2rem"}
-      color={"white"}
-      flexDirection={"column"}
-    >
-      <CompiledCards />
-      <Text
-        fontSize={{ base: "1.1rem", md: "1.2rem" }}
-        fontFamily="Didact Gothic"
-        color={"#999999"}
-        textAlign={"center"}
-        fontWeight={900}
+        m={10}
+        alignItems={"center"}
+        gap={"2rem"}
+        color={"white"}
+        flexDirection={"column"}
       >
-        Already have an account? <Link to={'/'}><u>Login</u></Link>
-      </Text>
-    </Flex>
+        <CompiledCards />
+        <Text
+          fontSize={{ base: "1.1rem", md: "1.2rem" }}
+          fontFamily="Didact Gothic"
+          color={"#999999"}
+          textAlign={"center"}
+          fontWeight={900}
+        >
+          Already have an account?{" "}
+          <Link to={"/"}>
+            <u>Login</u>
+          </Link>
+        </Text>
+      </Flex>
     </>
   );
 }

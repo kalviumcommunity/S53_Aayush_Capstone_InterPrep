@@ -4,6 +4,7 @@ import {
   Breadcrumb,
   BreadcrumbItem,
   BreadcrumbLink,
+  Flex,
   Text,
 } from "@chakra-ui/react";
 import { ChevronRightIcon } from "@chakra-ui/icons";
@@ -11,7 +12,7 @@ import { Link } from "react-router-dom";
 
 function FreelanceHead() {
   return (
-    <>
+    <Flex direction={"column"}>
       <Box pb={{ base: "1", md: "3" }}>
         <Breadcrumb separator={<ChevronRightIcon color="gray.300" />}>
           <BreadcrumbItem>
@@ -48,12 +49,15 @@ function FreelanceHead() {
         </Breadcrumb>
       </Box>
       <Box pb={{ base: "1", md: "3" }}>
-        <Text fontSize={{ base: "1.2rem", md: "2rem" }} 
-        fontFamily="Didact Gothic" fontWeight={900}>
+        <Text
+          fontSize={{ base: "1.2rem", md: "2rem" }}
+          fontFamily="Didact Gothic"
+          fontWeight={900}
+        >
           All Freelance Gigs
         </Text>
       </Box>
-    </>
+    </Flex>
   );
 }
 

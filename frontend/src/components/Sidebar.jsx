@@ -23,13 +23,13 @@ import {
   FiTrendingUp,
   FiUsers,
   FiBookmark,
-  FiMenu,
 } from "react-icons/fi";
 import { MdOutlineHistoryToggleOff } from "react-icons/md";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 import Logo from "../assets/Logo.png";
 import { memo } from "react";
 import { Link } from "react-router-dom";
+import Circ from "./Circ";
 
 const LinkItems = [
   { name: "Home", icon: FiHome, to: "/" },
@@ -70,6 +70,8 @@ const SidebarContent = ({ onClose, ...rest }) => {
           {link.name}
         </NavItem>
       ))}
+      <Circ color={"#3A387B"} width={"10rem"} blur={"blur(90px)"} top={"60vh"} />
+
     </Box>
   );
 };
@@ -137,7 +139,7 @@ const MobileNav = ({ onOpen, ...rest }) => {
         id="logo-img"
         draggable="false"
         display={{ base: "block", md: "none" }}
-        padding="1rem 1rem"
+        padding="0.2rem 0.2rem"
       />
 
       <HStack spacing={{ base: "0", md: "6" }}>
