@@ -70,7 +70,8 @@ const SidebarContent = ({ onClose, ...rest }) => {
           {link.name}
         </NavItem>
       ))}
-      <Circ color={"#3A387B"} width={"10rem"} blur={"blur(90px)"} top={"60vh"} />
+      <Circ color={"#3A387B"} width={"9.5rem"} blur={"blur(75px)"} top={"30vh"} zind={-1}/>
+      <Circ color={"#984382"} width={"9rem"} blur={"blur(90px)"} top={"55vh"} zind={-1} left={0} sec={"5"}/>
 
     </Box>
   );
