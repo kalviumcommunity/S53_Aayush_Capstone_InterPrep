@@ -2,7 +2,7 @@ import { Box } from "@chakra-ui/react";
 import { keyframes } from "@emotion/react";
 import React from "react";
 
-function Circ({ color, width, blur, right, left, top, bottom }) {
+function Circ({ color, width, blur, right, left, top, bottom, zind, sec }) {
   return (
     <Box
       width={{ base: 0, lg: width }}
@@ -11,12 +11,12 @@ function Circ({ color, width, blur, right, left, top, bottom }) {
       borderRadius={"100%"}
       filter={blur}
       position={"absolute"}
-      zIndex={"0"}
+      zIndex={zind ? zind : "0"}
       top={top}
       bottom={bottom}
       right={right}
       left={left}
-      animation={`${pulse} 3s infinite ease-in`}
+      animation={`${pulse} ${sec ? sec : 3}s infinite ease-in`}
     >
       &nbsp;
     </Box>
@@ -32,7 +32,7 @@ const pulse = keyframes`
   }
   50% {
     transform: scale(0.9);
-    opacity: 0.9;
+    opacity: 0.8;
   }
   100% {
     transform: scale(1);
