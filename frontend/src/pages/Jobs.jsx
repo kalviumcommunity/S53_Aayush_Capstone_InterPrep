@@ -1,22 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { ChevronRightIcon, Search2Icon } from "@chakra-ui/icons";
+import { Search2Icon } from "@chakra-ui/icons";
 import {
   Box,
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
   Flex,
   HStack,
   Input,
   InputGroup,
   InputLeftElement,
-  Text,
 } from "@chakra-ui/react";
 import JobBox from "../components/Jobs/JobBox";
 import axios from "axios";
 import { CircleLoader } from "react-spinners";
-import { Link } from "react-router-dom";
 import JobsHead from "../components/Jobs/JobsHead";
+import Circ from "../components/Circ";
 
 function Jobs() {
   const [jobData, setJobData] = useState([]);
@@ -25,15 +21,15 @@ function Jobs() {
 
   useEffect(() => {
     let timeoutId;
-  
+
     if (typingTimeout) {
       clearTimeout(typingTimeout);
     }
-  
+
     timeoutId = setTimeout(() => {
       fetchData();
     }, 500);
-  
+
     return () => {
       if (timeoutId) {
         clearTimeout(timeoutId);
@@ -61,12 +57,14 @@ function Jobs() {
       display={"flex"}
       justifyContent={{ base: "center", md: "flex-start" }}
       backgroundColor={"#000"}
+      position="relative"
     >
       <Flex
         flexDirection={"column"}
         gap={"1rem"}
         p={{ base: "3", md: "8" }}
         color={"white"}
+        width="100%"
       >
         <JobsHead />
         <Box pb={{ base: "1", md: "4" }}>
@@ -80,6 +78,7 @@ function Jobs() {
               placeholder="Search for Opportunities"
               borderRadius="10px"
               onChange={handleFind}
+              id="findJob"
               w={{ base: "18rem", md: "28rem" }}
             />
           </InputGroup>
@@ -89,18 +88,16 @@ function Jobs() {
           display="flex"
           flexDirection="column"
           gap={10}
+          position="relative"
         >
           {jobData.length === 0 ? (
             <Flex
-            position="absolute"
-            top="50%"
-            left="50%"
-            transform="translate(-50%, -50%)"
-            alignItems="center"
-            justifyContent="center"
-          >
-            <CircleLoader color="white" />
-          </Flex>
+              position={"absolute"}
+              left={{ base: "45%", md: "40%" }}
+              top={"18vh"}
+            >
+              <CircleLoader color="white" />
+            </Flex>
           ) : (
             jobData.map((e, i) => {
               return <JobBox data={e} key={i} />;
@@ -108,6 +105,13 @@ function Jobs() {
           )}
         </Box>
       </Flex>
+      <Circ
+        color={"#984382"}
+        right={-20}
+        top={"70vh"}
+        width={"11rem"}
+        blur={"blur(95px)"}
+      />
     </HStack>
   );
 }

@@ -33,7 +33,7 @@ function FreelanceBox({ data }) {
       color={"#FFFFFF"}
       p={{ base: "1", sm: "2" }}
       borderRadius={"12px"}
-      width={{ md: "27vw", lg: "30vw", xl: "33vw" }}
+      width={{ md: "100%", lg: "30vw", xl: "33vw" }}
     >
       <CardBody height={"100%"}>
         <Stack
@@ -145,34 +145,34 @@ function FreelanceBox({ data }) {
           </StatGroup>
         </Stack>
       </CardBody>
-      <CardFooter display={'flex'} justifyContent={'center'} p={5}>
-      <Button
-            fontSize={"16px"}
-            width={"140px"}
-            height="40px"
-            color={"white"}
-            borderRadius={12}
-            bg={"#FFFFFF20"}
-            onClick={() => openTo(data._id)}
-            href={`https://skillforge.rikhiltaneja.com/task/details/${data._id}`}
-            borderBottom={"2px solid white"}
-            transition={"all 0.3s"}
-            _hover={{
-              boxShadow: "0 6px 10px 0 #ffffff60",
-            }}
-            _active={{
-              bg: "#FFFFFF10",
-            }}
-            fontFamily="Didact Gothic"
-          >
-            Know more!
-            <Icon
-              fontSize="1rem"
-              as={FaArrowRightLong}
-              cursor={"pointer"}
-              ml={2}
-            />
-          </Button>
+      <CardFooter display={"flex"} justifyContent={"center"} p={5}>
+        <Button
+          fontSize={"16px"}
+          width={"140px"}
+          height="40px"
+          color={"white"}
+          borderRadius={12}
+          bg={"#FFFFFF20"}
+          onClick={() => openTo(data._id)}
+          href={`https://skillforge.rikhiltaneja.com/task/details/${data._id}`}
+          borderBottom={"2px solid white"}
+          transition={"all 0.3s"}
+          _hover={{
+            boxShadow: "0 6px 10px 0 #ffffff60",
+          }}
+          _active={{
+            bg: "#FFFFFF10",
+          }}
+          fontFamily="Didact Gothic"
+        >
+          Know more!
+          <Icon
+            fontSize="1rem"
+            as={FaArrowRightLong}
+            cursor={"pointer"}
+            ml={2}
+          />
+        </Button>
       </CardFooter>
     </Card>
   );

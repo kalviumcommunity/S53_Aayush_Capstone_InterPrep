@@ -4,6 +4,7 @@ import FreelanceHead from "../components/Freelance/FreelanceHead";
 import axios from "axios";
 import FreelanceBox from "../components/Freelance/FreelanceBox";
 import { CircleLoader } from "react-spinners";
+import Circ from "../components/Circ";
 
 function Freelance() {
   const [gigData, setGigData] = useState([]);
@@ -24,12 +25,14 @@ function Freelance() {
       display={"flex"}
       justifyContent={{ base: "center", md: "flex-start" }}
       backgroundColor={"#000"}
+      position="relative"
     >
       <Flex
         flexDirection={"column"}
         gap={"1rem"}
         p={{ base: "3", md: "8" }}
         color={"white"}
+        width={"100%"}
       >
         <FreelanceHead />
         <Box
@@ -40,12 +43,9 @@ function Freelance() {
         >
           {gigData.length === 0 ? (
             <Flex
-              position="absolute"
-              top="50%"
-              left="50%"
-              transform="translate(-50%, -50%)"
-              alignItems="center"
-              justifyContent="center"
+              position={"absolute"}
+              left={{ base: "45%", md: "40%" }}
+              top={"40vh"}
             >
               <CircleLoader color="white" />
             </Flex>
@@ -56,6 +56,13 @@ function Freelance() {
           )}
         </Box>
       </Flex>
+      <Circ
+        color={"#984382"}
+        right={-20}
+        top={"70vh"}
+        width={"11rem"}
+        blur={"blur(95px)"}
+      />
     </HStack>
   );
 }
