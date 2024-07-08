@@ -18,14 +18,10 @@ import {
   useDisclosure,
   Image,
 } from "@chakra-ui/react";
-import {
-  FiHome,
-  FiTrendingUp,
-  FiUsers,
-  FiBookmark,
-} from "react-icons/fi";
-import { MdOutlineHistoryToggleOff } from "react-icons/md";
+import { FiHome, FiUsers, FiBookmark } from "react-icons/fi";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
+import { GiReceiveMoney } from "react-icons/gi";
+import { MdWork } from "react-icons/md";
 import Logo from "../assets/Logo.png";
 import { memo } from "react";
 import { Link } from "react-router-dom";
@@ -33,10 +29,10 @@ import Circ from "./Circ";
 
 const LinkItems = [
   { name: "Home", icon: FiHome, to: "/" },
-  { name: "History", icon: MdOutlineHistoryToggleOff, to: "" },
   { name: "Commmunity", icon: FiUsers, to: "" },
   { name: "Saved", icon: FiBookmark, to: "" },
-  { name: "Stats", icon: FiTrendingUp, to: "" },
+  { name: "Freelance", icon: GiReceiveMoney, to: "/gigs" },
+  { name: "Jobs", icon: MdWork, to: "/jobs" },
 ];
 
 const SidebarContent = ({ onClose, ...rest }) => {
@@ -70,9 +66,23 @@ const SidebarContent = ({ onClose, ...rest }) => {
           {link.name}
         </NavItem>
       ))}
-      <Circ color={"#3A387B"} width={"9.5rem"} blur={"blur(75px)"} top={"30vh"} zind={-1}/>
-      <Circ color={"#984382"} width={"9rem"} blur={"blur(90px)"} top={"55vh"} zind={-1} left={0} sec={"5"}/>
-
+      <Circ
+        color={"#3A387B"}
+        width={"9rem"}
+        blur={"blur(45px)"}
+        top={"30vh"}
+        left={14}
+        zind={-1}
+      />
+      <Circ
+        color={"#984382"}
+        width={"10rem"}
+        blur={"blur(80px)"}
+        top={"55vh"}
+        zind={-1}
+        left={0}
+        sec={"6"}
+      />
     </Box>
   );
 };
