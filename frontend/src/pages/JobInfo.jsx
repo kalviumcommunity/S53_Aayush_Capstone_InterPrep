@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import { Box, Flex, HStack } from "@chakra-ui/react";
 import { useNavigate, useParams } from "react-router-dom";
 import JobInfoBox from "../components/JobInfo/JobInfoBox";
@@ -83,4 +83,4 @@ function JobInfo() {
   );
 }
 
-export default JobInfo;
+export default memo(JobInfo);

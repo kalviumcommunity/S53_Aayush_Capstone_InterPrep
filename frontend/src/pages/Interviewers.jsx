@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import { Box, Flex, HStack } from "@chakra-ui/react";
 import axios from "axios";
 import { CircleLoader } from "react-spinners";
@@ -59,4 +59,4 @@ function Interviewers() {
   );
 }
 
-export default Interviewers;
+export default memo(Interviewers);

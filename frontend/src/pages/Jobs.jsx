@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import { Search2Icon } from "@chakra-ui/icons";
 import {
   Box,
@@ -116,4 +116,4 @@ function Jobs() {
   );
 }
 
-export default Jobs;
+export default memo(Jobs);

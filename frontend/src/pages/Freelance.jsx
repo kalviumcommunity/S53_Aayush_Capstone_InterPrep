@@ -1,5 +1,5 @@
 import { Box, Flex, HStack } from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import FreelanceHead from "../components/Freelance/FreelanceHead";
 import axios from "axios";
 import FreelanceBox from "../components/Freelance/FreelanceBox";
@@ -67,4 +67,4 @@ function Freelance() {
   );
 }
 
-export default Freelance;
+export default memo(Freelance);
