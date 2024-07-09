@@ -18,7 +18,7 @@ function AllRoutes() {
         <Route path='/' element={<Homepage/>}/>
         <Route path='/interviewer/signup' element={<IntSignUp />}/>
         <Route path='/user/signup' element={<UserSignup />}/>
-        <Route path='/browse' element={<Sidebar children={<Mainpage />}/>}/>
+        <Route path='/dashboard' element={<Sidebar children={<Mainpage />}/>}/>
         <Route path='/start' element={<GetStarted />}/>
         <Route path='/jobs' element={<Sidebar children={<Jobs />}/>}/>
         <Route path='/jobs/:id' element={<Sidebar children={<JobInfo />}/>} />

@@ -1,6 +1,7 @@
 import React, { memo } from "react";
-import { Flex, HStack } from "@chakra-ui/react";
+import { Box, Card, CardBody, Divider, Flex, Heading, HStack, Image, Stack, Text } from "@chakra-ui/react";
 import TopComponent from "../components/Mainpage/TopComponent";
+import MidComponent from "../components/Mainpage/MidComponent";
 
 function Mainpage() {
   return (
@@ -11,11 +12,14 @@ function Mainpage() {
     >
       <Flex
         flexDirection={"column"}
-        p={{ base: "3", md: "10" }}
+        p={{ base: "3", md: "8" }}
         color={"white"}
         width={"100%"}
+        gap={8}
       >
         <TopComponent />
+        <Divider borderRadius={"30px"} display={{base:"block", md:"none"}} opacity={'30%'}/>
+        <MidComponent />
       </Flex>
     </HStack>
   );
