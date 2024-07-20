@@ -58,9 +58,9 @@ This project is based on MERN Stack
 - [x] Signup as a User
 - [ ] Signup as a Company
 - [ ] Welcome E-Mail on Signup
-- [ ] Interview Booking Page (<- Currently Working on this)
+- [x] Interview Booking Page
 - [ ] Book Interviews
-- [ ] Payment Gateway
+- [ ] Payment Gateway (<- Currently Working on this)
 - [ ] Video Call
 
 ### Reach out to me
