@@ -75,3 +75,8 @@ export const jobValidation = Joi.object({
     notice: Joi.string().required(),
     datePosted: Joi.string()
 });
+
+export const testimonialValidation = Joi.object({
+    description: Joi.string().required(),
+    user: Joi.string()
+})

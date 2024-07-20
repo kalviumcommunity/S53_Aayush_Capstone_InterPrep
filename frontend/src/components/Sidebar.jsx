@@ -144,14 +144,15 @@ const MobileNav = ({ onOpen, ...rest }) => {
         aria-label="open menu"
         icon={<HamburgerIcon w={6} h={6} color="white" />}
       />
-
-      <Image
-        src={Logo}
-        id="logo-img"
-        draggable="false"
-        display={{ base: "block", md: "none" }}
-        padding="0.2rem 0.2rem"
-      />
+      <Link to={"/"}>
+        <Image
+          src={Logo}
+          id="logo-img"
+          draggable="false"
+          display={{ base: "block", md: "none" }}
+          padding="0.2rem 0.2rem"
+        />
+      </Link>
 
       <HStack spacing={{ base: "0", md: "6" }}>
         <Flex alignItems={"center"}>
