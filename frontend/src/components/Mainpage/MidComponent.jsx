@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Box, Flex, Text } from "@chakra-ui/react";
+import { Box, Center, Flex, Text } from "@chakra-ui/react";
 import MiniJobCard from "./MiniJobCard";
+import { CircleLoader } from "react-spinners";
 import axios from "axios";
 
 function MidComponent() {
@@ -58,9 +59,14 @@ function MidComponent() {
         flexDirection={{ base: "column", lg: "row" }}
         alignItems={"center"}
       >
-        {lastFourJobs.map((e, i) => (
-          <MiniJobCard key={i} job={e} />
-        ))}
+        {lastFourJobs.length === 0 ? (
+        <Center w="100%" alignItems="center"
+              justifyContent="center">
+          <CircleLoader color="white"/>
+        </Center>
+      ) : (
+        lastFourJobs.map((e, i) => <MiniJobCard key={i} job={e} />)
+      )}
       </Box>
     </Flex>
   );
