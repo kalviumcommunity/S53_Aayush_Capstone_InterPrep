@@ -4,11 +4,11 @@ import Post from "../models/post.model.js";
 import User from "../models/user.model.js";
 
 export const getPosts = wrapAsync(async (req, res) => {
-    await Post.find().populate('user').populate('comments').then((data) => { returnData = data });
-    if (returnData.length == 0) {
-        throw new ExpressError(404, "No Posts Yet!")
+    const returnData = await Post.find().populate('user').populate('comments');
+    if (returnData.length === 0) {
+        throw new ExpressError(404, "No Posts Yet!");
     }
-    res.send(returnData)
+    res.send(returnData);
 });
 
 export const newPost = wrapAsync(async (req, res) => {

@@ -4,6 +4,7 @@ import HomeNavbar from "../components/Home/HomeNavbar";
 import HomeFAQ from "../components/Home/HomeFaq";
 import Footer from "../components/Footer/Footer";
 import HomeCompany from "../components/Home/HomeCompany";
+import { Link } from "react-router-dom";
 
 function Homepage() {
   return (
@@ -37,28 +38,32 @@ function Homepage() {
           flexDirection={["column", "column", "row"]}
           spacing={4}
         >
-          <Button
-            bgGradient="linear(to-r, #3E005B, #5B004D)"
-            color="white"
-            _hover={{
-              bgGradient: "linear(to-r, #5B004D, #3E005B)",
-            }}
-            fontFamily="Didact Gothic"
-            size={["md", "md", "lg"]}
-          >
-            Apply for Jobs
-          </Button>
-          <Button
-            bg="rgba(153, 153, 153, 0.22)"
-            color="white"
-            fontFamily="Didact Gothic"
-            _hover={{
-              bg: "rgba(153, 153, 153, 0.35)",
-            }}
-            size={["md", "md", "lg"]}
-          >
-            Hire from Us
-          </Button>
+          <Link to={"/dashboard"}>
+            <Button
+              bgGradient="linear(to-r, #3E005B, #5B004D)"
+              color="white"
+              _hover={{
+                bgGradient: "linear(to-r, #5B004D, #3E005B)",
+              }}
+              fontFamily="Didact Gothic"
+              size={["md", "md", "lg"]}
+            >
+              Practice
+            </Button>
+          </Link>
+          <Link to={'/jobs'}>
+            <Button
+              bg="rgba(153, 153, 153, 0.22)"
+              color="white"
+              fontFamily="Didact Gothic"
+              _hover={{
+                bg: "rgba(153, 153, 153, 0.35)",
+              }}
+              size={["md", "md", "lg"]}
+            >
+              Apply for Jobs
+            </Button>
+          </Link>
         </Stack>
         <div className="hero-img"></div>
         <HomeCompany />

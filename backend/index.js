@@ -8,6 +8,7 @@ import postControl from "./routes/post.routes.js";
 import jobControl from "./routes/jobs.routes.js";
 import companyControl from "./routes/company.routes.js";
 import apiControl from "./routes/api.routes.js";
+import testimonialControl from "./routes/testimonial.routes.js";
 
 dotenv.config();
 
@@ -35,7 +36,8 @@ app.use('/user', userControl);
 app.use('/interviewer', interviewerControl);
 app.use('/post', postControl);
 app.use('/jobs', jobControl)
-app.use('/company', companyControl)
+app.use('/company', companyControl);
+app.use('/testimonial', testimonialControl);
 app.use('/api', apiControl);
 
 const PORT = process.env.PORT || 8080;

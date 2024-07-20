@@ -30,9 +30,9 @@ function JobsHead() {
               fontFamily="Didact Gothic"
               fontSize={{ base: "0.9rem", md: "1.1rem" }}
               as={Link}
-              to="/browse"
+              to="/dashboard"
             >
-              Browse
+              Dashboard
             </BreadcrumbLink>
           </BreadcrumbItem>
 

@@ -31,7 +31,7 @@ function MiniJobCard({job}) {
           <Text
           
           fontFamily={"Didact Gothic"}
-            fontSize={{ base: "1.1rem", md: "1.3rem" }}>{job.name}</Text>
+            fontSize={{ base: "1.1rem", md: "1.2rem" }}>{job.name}</Text>
           <Text
           fontFamily={"Didact Gothic"}
           fontSize={{ base: "1rem", md: "1.1rem" }}
