@@ -1,11 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Didact+Gothic&display=swap');
-
-@font-face{
+@font-face {
   font-family: AppleGaramond;
   src: url(./assets//AppleGaramond.ttf);
 }
 
-@font-face{
+@font-face {
   font-family: FranklinGoth;
   src: url(./assets/FranklinGothic-Medium.otf);
 }
@@ -30,7 +28,7 @@ body {
 
 /* homepage css*/
 
-#hero-img{
+#hero-img {
   height: 100vh;
   width: 100vw;
 }
@@ -57,10 +55,10 @@ input[type="file"] {
   align-items: center;
 }
 
-.hero-img{
+.hero-img {
   background-image: url(./assets/Hero.png);
   background-repeat: no-repeat;
-    height: 400px;
-    width: 100vw;
-    background-size: cover;
+  height: 400px;
+  width: 100vw;
+  background-size: cover;
 }
