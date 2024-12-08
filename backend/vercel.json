@@ -19,5 +19,9 @@
         "Access-Control-Allow-Headers": "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version"
       }
     }
-  ]
+  ],
+  "buildCommand": "tsc -b",
+  "outputDirectory": "dist",
+  "installCommand": "npm install",
+  "developmentCommand": "node dist/index.js"
 }
