@@ -22,6 +22,5 @@
   ],
   "buildCommand": "tsc -b",
   "outputDirectory": "dist",
-  "installCommand": "npm install",
-  "developmentCommand": "node dist/index.js"
+  "installCommand": "npm install"
 }
