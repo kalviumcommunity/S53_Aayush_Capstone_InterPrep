@@ -21,6 +21,5 @@
     }
   ],
   "buildCommand": "tsc -b",
-  "outputDirectory": "dist",
   "installCommand": "npm install"
 }
