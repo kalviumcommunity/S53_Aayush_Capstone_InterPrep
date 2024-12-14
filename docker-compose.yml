@@ -11,15 +11,3 @@ services:
     volumes:
       - ./frontend:/app
     command: npm run dev
-  
-  server:
-    build:
-      context: ./backend
-      dockerfile: Dockerfile
-    ports:
-      - "8080:8080"
-    env_file:
-      - ./backend/.env
-    volumes:
-      - ./backend:/app
-    command: node index.js
